@@ -1,5 +1,5 @@
 
-import Footer from "../components/Shared/Footer/footer";
+import Footer from "./components/Shared/Footer/footer";
 import "./globals.css";
 
 
