@@ -1,68 +1,230 @@
-import Link from "next/link";
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
+import SunEditor from "suneditor-react";
+import "suneditor/dist/css/suneditor.min.css";
+import { useRouter } from "next/navigation";
+import { useBlogs } from "@/utils/customHooks/useBlogs";
+import Image from "next/image";
 
-const EditBlogForm = () => {
+const EditBlogForm = ({ blog }) => {
+  const router = useRouter();
+  const { refetchBlogs } = useBlogs();
+
+  const [formData, setFormData] = useState({
+    title: "",
+    descriptions: "",
+    seoDescriptions: "",
+    category: "",
+    tags: [],
+    imagePath: null,
+  });
+  // Fetch existing blog data
+  useEffect(() => {
+    if (blog) {
+      setFormData({
+        title: blog?.title,
+        descriptions: blog?.descriptions,
+        seoDescriptions: blog?.seoDescriptions,
+        category: blog?.category,
+        tags: blog?.tags,
+        imagePath: blog?.imagePath,
+      });
+    }
+  }, [blog]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formDataToSubmit = new FormData();
+
+    formDataToSubmit.append("title", formData?.title);
+    formDataToSubmit.append("seoDescriptions", formData?.seoDescriptions);
+    formDataToSubmit.append("descriptions", formData?.descriptions);
+    formDataToSubmit.append("category", formData?.category);
+    formDataToSubmit.append("tags", JSON.stringify(formData?.tags));
+    if (formData?.imagePath instanceof File) {
+      alert("image instanceof File");
+      formDataToSubmit.append("image", formData?.imagePath);
+    }
+
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/blogs/${blog?._id}`,
+        {
+          method: "PUT",
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+          body: formDataToSubmit,
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to update location");
+      }
+
+      await refetchBlogs();
+      router.push("/dashboard/all-blogs");
+    } catch (error) {
+      console.error("Error updating blog:", error);
+    }
+  };
+
+  const handleContentChange = (content) => {
+    setFormData((prev) => ({ ...prev, descriptions: content }));
+  };
+
+  const handleImageUpload = (event) => {
+    setFormData((prev) => ({ ...prev, imagePath: event.target.files[0] }));
+  };
+
   return (
-    <div className="Add">
-      {/* header for add glance comps */}
-      <div className=" mb-4 bg-white p-4 md:p-6">
-        <h1 className="text-xl md:text-2xl">Update Glance Info</h1>
-        <p>
-          <small>Fields with (*) marks are required.</small>
-        </p>
-      </div>
-
-      {/* form for add glance comps */}
-      <div className="bg-white p-4 md:p-6">
-        <h1 className="text-2xl border-b mb-4 pb-4">Section Info</h1>
-        <form>
-          <div className="lg:flex gap-4 items-center justify-center my-12">
-            <div className="mb-4 w-full">
-              <label htmlFor="order" className="block text-sm font-bold mb-2">
-                Count <span className="text-red-600">*</span>
-              </label>
-              <input
-                type="number"
-                id="order"
-                name="order"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                placeholder="Enter order"
-              />
-            </div>
-            <div className="mb-4 w-full">
-              <label
-                htmlFor="description"
-                className="block text-sm font-bold mb-2"
-              >
-                Text <span className="text-red-600">*</span>
-              </label>
-              <input
-                type="text"
-                id="description"
-                name="description"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                placeholder="Enter service description"
-              />
-            </div>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <div className="blogFields">
+          <input
+            type="text"
+            placeholder="Blog Title"
+            value={formData.title}
+            onChange={(e) =>
+              setFormData((prev) => ({ ...prev, title: e.target.value }))
+            }
+            className="outline-none border my-2 p-3 w-full"
+          />
+          <div className="border p-2 my-2">
+            <label className="block text-sm font-medium text-gray-700">
+              Category
+            </label>
+            <select
+              value={formData.category}
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, category: e.target.value }))
+              }
+              name="category"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
+            >
+              <option value="" disabled>
+                Select a category
+              </option>
+              {[
+                "Adventure",
+                "Beach",
+                "Culture",
+                "Historical",
+                "Nature",
+                "Wildlife",
+                "Uncategorized",
+              ].map((sgCtg, index) => (
+                <option key={index} value={sgCtg}>
+                  {sgCtg}
+                </option>
+              ))}
+            </select>
           </div>
 
-          <div className="flex items-center justify-center gap-2">
-            <button
-              //   onClick={() => handleToggle("list")}
-              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="button"
-            >
-              <Link href={"/dashboard/all-blogs"}>Cancel</Link>
-            </button>
-            <button
-              className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="submit"
-            >
-              Edit
-            </button>
+          {formData?.imagePath && (
+            <div className="flex justify-center my-4">
+              <Image
+                src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/${blog?.imagePath}`}
+                alt={formData?.title}
+                className="max-w-full h-auto w-60 object-cover"
+                width={500}
+                height={500}
+              />
+            </div>
+          )}
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+            className="border p-2 w-full mt-2 mb-8"
+          />
+
+          <SunEditor
+            autoFocus={true}
+            placeholder="Enter the content"
+            width="100%"
+            height="500"
+            setContents={formData?.descriptions} // Use setContents to initialize content
+            onChange={handleContentChange}
+            setOptions={{
+              font: [
+                "Arial",
+                "Comic Sans MS",
+                "Courier New",
+                "Impact",
+                "Georgia",
+                "Tahoma",
+                "Trebuchet MS",
+                "Verdana",
+                "Logical",
+                "Salesforce Sans",
+                "Garamond",
+                "Sans-Serif",
+                "Serif",
+                "Times New Roman",
+                "Helvetica",
+              ],
+              fontSize: [
+                8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 36, 42, 55,
+                60,
+              ],
+              popupDisplay: "local",
+              buttonList: [
+                ["undo", "redo"],
+                ["font", "fontSize", "formatBlock"],
+                ["textStyle", "fontColor", "hiliteColor", "horizontalRule"],
+                ["bold", "underline", "italic", "strike"],
+                ["subscript", "superscript", "removeFormat", "blockquote"],
+                [
+                  "list",
+                  "align",
+                  "table",
+                  "image",
+                  "preview",
+                  "video",
+                  "audio",
+                ],
+              ],
+            }}
+          />
+        </div>
+
+        <div className="my-2">
+          <div className="seoFields grid grid-cols-1 gap-4 my-8">
+            <input
+              type="text"
+              value={formData.tags.join(",")}
+              onChange={(e) =>
+                setFormData((prev) => ({
+                  ...prev,
+                  tags: e.target.value.split(","),
+                }))
+              }
+              className="border p-2"
+              placeholder="use comma(,) for tags"
+            />
+            <textarea
+              value={formData.seoDescriptions}
+              onChange={(e) =>
+                setFormData((prev) => ({
+                  ...prev,
+                  seoDescriptions: e.target.value,
+                }))
+              }
+              className="border p-2 min-h-44"
+              placeholder="SEO descriptions"
+            />
           </div>
-        </form>
-      </div>
+
+          <button
+            type="submit"
+            className="border p-3 bg-black text-white w-full"
+          >
+            Update Blog
+          </button>
+        </div>
+      </form>
     </div>
   );
 };
