@@ -1,6 +1,6 @@
 import React from "react";
 
-const GlancesForm = ({ handleToggle }) => {
+const BlogCategoryAddForm = ({ handleToggle }) => {
   //   const [first, setfirst] = useState(second);
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -72,4 +72,4 @@ const GlancesForm = ({ handleToggle }) => {
   );
 };
 
-export default GlancesForm;
+export default BlogCategoryAddForm;

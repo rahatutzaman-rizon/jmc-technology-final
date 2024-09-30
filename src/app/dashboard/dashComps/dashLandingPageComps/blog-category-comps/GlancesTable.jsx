@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FaTrash, FaEdit, FaEye } from "react-icons/fa";
 
-const GlancesTable = ({ handleToggle }) => {
+const BlogCategoryTable = ({ handleToggle }) => {
   const [data, setData] = useState([]);
   const [confirmationMsg, setConfirmationMsg] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -42,7 +42,7 @@ const GlancesTable = ({ handleToggle }) => {
   return (
     <div className="list">
       <div className="page-header flex justify-between items-center mb-4 bg-white p-4 md:p-6 shadow">
-        <p className="text-xl md:text-2xl">Glances</p>
+        <p className="text-xl md:text-2xl">Blog Categories</p>
         <button
           onClick={() => handleToggle("add")}
           className="create-btn text-dashPrimary border-dashPrimary border bg-white rounded py-2 px-4"
@@ -130,4 +130,4 @@ const GlancesTable = ({ handleToggle }) => {
   );
 };
 
-export default GlancesTable;
+export default BlogCategoryTable;

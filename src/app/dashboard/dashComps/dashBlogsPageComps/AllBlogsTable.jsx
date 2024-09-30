@@ -132,6 +132,7 @@
 // export default AllBlogsTable;
 
 "use client";
+import { SkeletonListTable } from "@/components/Shared/commonComps/AllLoadingskeletons";
 import { deleteBlogs, useBlogs } from "@/utils/customHooks/useBlogs";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -188,6 +189,10 @@ const AllBlogsTable = () => {
   const totalPages = Math.ceil(blogs?.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentItems = blogs?.slice(startIndex, startIndex + itemsPerPage);
+
+  if (isLoading) {
+    return <SkeletonListTable />;
+  }
 
   return (
     <div className="list">

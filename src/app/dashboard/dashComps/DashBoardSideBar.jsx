@@ -65,7 +65,7 @@ const navItemsUp = [
       },
       {
         name: "Category",
-        href: "/dashboard/blog/category",
+        href: "/dashboard/blog-category",
       },
     ],
   },

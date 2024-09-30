@@ -1,12 +1,16 @@
+// "use client";
 
-import React from 'react'
+import AllBlogsPageComps from "@/components/blogsPage/AllBlogsPageComps";
 
-const page = () => {
-  return (
-    <div>
-      <h2>this</h2>
-    </div>
-  )
-}
+export const metadata = {
+  title: {
+    absolute: "Blog - JMC Tours & Travels", // it overwrites default title of layout.js
+  },
+  description: "Blog",
+};
 
-export default page
+const AllBlogsPage = () => {
+  return <AllBlogsPageComps />;
+};
+
+export default AllBlogsPage;
