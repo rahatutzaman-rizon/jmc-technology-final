@@ -94,8 +94,8 @@ const navItemsUp = [
         href: "/dashboard/career/department",
       },
       {
-        name: "Job",
-        href: "/dashboard/all-jobs",
+        name: "All Applied Jobs",
+        href: "/dashboard/all-applied-jobs",
       },
       {
         name: "Online Application",
