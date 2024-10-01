@@ -5,7 +5,7 @@ import Header from "../components/shared/header";
 const Clientlayout = ({ children }) => {
   return (
     <>
-    
+    <Header></Header>
       {children}
        
     </>
