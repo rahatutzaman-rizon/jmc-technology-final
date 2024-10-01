@@ -31,7 +31,7 @@ const MissionVision = () => {
         </svg>
       </motion.div>
 
-      <div className="max-w-6xl mx-auto relative z-10">
+      <div className="max-w-6xl mx-auto relative ">
         <motion.h1
           className="text-4xl md:text-5xl font-bold text-center mb-16 bg-clip-text text-black"
           initial={{ opacity: 0, y: -50 }}

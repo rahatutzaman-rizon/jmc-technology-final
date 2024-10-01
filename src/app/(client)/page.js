@@ -1,5 +1,7 @@
 import Banner from "../components/homepage/banner";
-import Services from "../components/homepage/service";
+import Service from "../components/homepage/service";
+import ServicesTabs from "../components/homepage/services";
+import TestimonialPage from "../components/homepage/testimonials";
 import MissionVision from "../components/homepage/vision";
 
 export default function Home() {
@@ -8,7 +10,10 @@ export default function Home() {
 
 <Banner></Banner>
 <MissionVision></MissionVision>
-<Services></Services>
+<Service></Service>
+<ServicesTabs></ServicesTabs>
+{/* <TestimonialPage></TestimonialPage> */}
+
 
 
    </div>
