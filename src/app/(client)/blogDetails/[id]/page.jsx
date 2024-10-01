@@ -77,7 +77,7 @@ const SgBlogDetails = async ({ params }) => {
           <div
             className="absolute inset-0 bg-bottom"
             style={{
-              backgroundImage: `url("https://res.cloudinary.com/djpw7o0bv/image/upload/v1727700007/blog_Page_banner_img_dty6wz.png")`,
+              backgroundImage: `url("https://bernardmarr.com/wp-content/uploads/2022/04/The-10-Biggest-Technology-Trends-That-Will-Transform-The-Next-Decade.jpg")`,
               backgroundAttachment: "fixed",
               backgroundSize: "cover",
               zIndex: -1,

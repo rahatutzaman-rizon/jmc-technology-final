@@ -1,28 +1,55 @@
 "use client";
+
 import { SkeletonListTable } from "@/components/Shared/commonComps/AllLoadingskeletons";
-import { deleteBlogs, useBlogs } from "@/utils/customHooks/useBlogs";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { FaTrash, FaEdit, FaEye } from "react-icons/fa";
+import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
 
-const AllBlogsTable = () => {
-  // const [data, setData] = useState([]);
-  const { isLoading, error, blogs, success, refetchBlogs } = useBlogs();
+const AllJobsTable = () => {
+  const [{ isLoading, error, appliedJobs }, setAppliedJobs] = useState({
+    isLoading: true,
+    error: null,
+    appliedJobs: null,
+  });
+  useEffect(() => {
+    const fetchAppliedJobsData = async () => {
+      try {
+        setAppliedJobs((prevState) => ({
+          ...prevState,
+          isLoading: true,
+        }));
+        const response = await import(
+          "./../../../../assets/fake-jsons/jobapplied.json"
+        );
+        setAppliedJobs({
+          isLoading: false,
+          error: null,
+          appliedJobs: response.default,
+        });
+      } catch (error) {
+        setAppliedJobs((prevState) => ({
+          ...prevState,
+          isLoading: false,
+          error,
+        }));
+      }
+    };
+    fetchAppliedJobsData();
+  }, []);
   const [confirmationMsg, setConfirmationMsg] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
 
   const handleDelete = async (id) => {
-    const isConfirmDeleteBlog = confirm(`Delete blog: ${id}`);
-    if (isConfirmDeleteBlog) {
-      const { status } = await deleteBlogs(id);
+    const isConfirmDeleteJobApplication = confirm(`Delete job: ${id}`);
+    if (isConfirmDeleteJobApplication) {
+      //   const { status } = await deleteJobs(id);
       console.log("status", status);
       if (status === 200) {
-        refetchBlogs();
         setConfirmationMsg("Row Deleted Successfully!");
-        alert("Blog deleted successfully");
+        alert("job deleted successfully");
       } else if (status === 404) {
-        alert("Blog deletion failed");
+        alert("job deletion failed");
       }
     }
   };
@@ -37,9 +64,12 @@ const AllBlogsTable = () => {
   };
 
   // Pagination logic
-  const totalPages = Math.ceil(blogs?.length / itemsPerPage);
+  const totalPages = Math.ceil(appliedJobs?.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentItems = blogs?.slice(startIndex, startIndex + itemsPerPage);
+  const currentItems = appliedJobs?.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
 
   if (isLoading) {
     return <SkeletonListTable />;
@@ -48,10 +78,10 @@ const AllBlogsTable = () => {
   return (
     <div className="list">
       <div className="page-header flex justify-between items-center mb-4 bg-white p-4 md:p-6 shadow">
-        <p className="text-xl md:text-2xl">All Blogs</p>
-        <button className="create-btn text-dashPrimary border-dashPrimary border bg-white rounded py-2 px-4">
-          <Link href={"/dashboard/add-blog"}>Add Blog</Link>
-        </button>
+        <p className="text-xl md:text-2xl">All Applied Jobs</p>
+        {/* <button className="create-btn text-dashPrimary border-dashPrimary border bg-white rounded py-2 px-4">
+          <Link href={"/dashboard/add-job"}>Add appliedJobs</Link>
+        </button> */}
       </div>
 
       {confirmationMsg && (
@@ -62,39 +92,35 @@ const AllBlogsTable = () => {
         <table className="min-w-full bg-white border border-gray-300 mb-4">
           <thead>
             <tr>
-              <th className="py-2 px-4 border-b">Title</th>
-              <th className="py-2 px-4 border-b">Description</th>
-              <th className="py-2 px-4 border-b">Category</th>
+              <th className="py-2 px-4 border-b">Applicant Name</th>
+              <th className="py-2 px-4 border-b">Contact No</th>
+              <th className="py-2 px-4 border-b">Job Title</th>
+              <th className="py-2 px-4 border-b">Appling Date</th>
               <th className="py-2 px-4 border-b">Actions</th>
             </tr>
           </thead>
           <tbody>
             {currentItems?.map((item, i) => (
               <tr key={i}>
-                <td className="py-2 px-4 border-b">{item?.title}</td>
                 <td className="py-2 px-4 border-b">
-                  {item?.seoDescriptions?.slice(0, 15) || "Description"}...
+                  {item?.firstName || "Anonymous"}
                 </td>
-                <td className="py-2 px-4 border-b">{item.category}</td>
+                <td className="py-2 px-4 border-b">
+                  {item?.mobileNumber || "+8801...."}
+                </td>
+                <td className="py-2 px-4 border-b">{item.jobTitle}</td>
+                <td className="py-2 px-4 border-b">{item.applingDate}</td>
                 <td className="py-3 px-4 border-b flex space-x-2">
-                  <button className="text-dashSideNavText hover:underline">
-                    <Link
-                      href={`/dashboard/edit-blog/${item._id}`}
-                      // href={`/dashboard/edit-blog/66fa70038b551b78744e9282`}
-                      // href={`/dashboard/edit-blog`}
-                    >
-                      <FaEdit />
-                    </Link>
-                  </button>
-                  <button
+                  <button className="text-dashSideNavText hover:underline"></button>
+                  {/* <button
                     onClick={() => handleDelete(item._id)}
                     className="text-dashSideNavText"
                   >
                     <FaTrash />
-                  </button>
+                  </button> */}
                   <button className="text-dashSideNavText hover:underline">
-                    <Link href={`/blogDetails/${item?._id}`}>
-                      <FaEye />
+                    <Link href={`/jobDetails/${item?._id}`}>
+                      <FaEye title="View Job Description" />
                     </Link>
                   </button>
                 </td>
@@ -137,4 +163,4 @@ const AllBlogsTable = () => {
   );
 };
 
-export default AllBlogsTable;
+export default AllJobsTable;

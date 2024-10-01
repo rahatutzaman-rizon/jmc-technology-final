@@ -19,6 +19,7 @@ module.exports = {
         dashAshText: "#9CA3AF", // Custom gray
         dashCaviarTitleText: "#424242", // Text color
         dashSideNavText: "#52525B", // Text color
+        careerRed: "#FF5857",
       },
     },
   },

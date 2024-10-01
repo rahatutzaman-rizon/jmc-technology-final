@@ -1,6 +1,8 @@
 [
     {
+      "_id":"1",
       "title": "Academic Writer",
+      "job_thumbnail":"https://img.freepik.com/free-photo/hiring-concept-with-empty-chair_23-2149519862.jpg",
       "vacancy_count": 3,
       "job_context": "We are seeking creative and detail-oriented Academic Writers to produce high-quality academic content for various subjects. Ideal candidates should have a strong command of the English language and excellent research skills.",
       "job_responsibilities": [
@@ -17,7 +19,9 @@
       "application_deadline": "2024-11-30"
     },
     {
+      "_id":"2",
       "title": "Junior Education Consultant",
+      "job_thumbnail":"https://img.freepik.com/free-photo/hiring-concept-with-empty-chair_23-2149519862.jpg",
       "vacancy_count": 4,
       "job_context": "Looking for Associate Educational Consultants with a minimum of one year of experience. Responsibilities include guiding students through study abroad applications and writing SOPs/Cover Letters.",
       "job_responsibilities": [
@@ -35,7 +39,9 @@
       "application_deadline": "2024-12-31"
     },
     {
+      "_id":"3",
       "title": "Senior Next.js Developer",
+      "job_thumbnail":"https://img.freepik.com/free-photo/hiring-concept-with-empty-chair_23-2149519862.jpg",
       "vacancy_count": 2,
       "job_context": "We are looking for a Senior Next.js Developer to lead our development team. Candidates should have extensive experience in Next.js and React.js, with a strong portfolio of projects.",
       "job_responsibilities": [
@@ -52,7 +58,9 @@
       "application_deadline": "2024-11-15"
     },
     {
+      "_id":"4",
       "title": "Mid Level MERN Developer",
+      "job_thumbnail":"https://img.freepik.com/free-photo/hiring-concept-with-empty-chair_23-2149519862.jpg",
       "vacancy_count": 5,
       "job_context": "Seeking a Mid Level MERN Developer to join our growing team. Candidates should be proficient in MongoDB, Express.js, React.js, and Node.js.",
       "job_responsibilities": [
@@ -69,7 +77,9 @@
       "application_deadline": "2024-11-20"
     },
     {
+      "_id":"5",
       "title": "DevOps Manager",
+      "job_thumbnail":"https://img.freepik.com/free-photo/hiring-concept-with-empty-chair_23-2149519862.jpg",
       "vacancy_count": 1,
       "job_context": "We are searching for a DevOps Manager to oversee our DevOps team and improve our deployment pipelines and infrastructure.",
       "job_responsibilities": [
@@ -84,8 +94,11 @@
         "range": "$90,000 - $110,000 per year"
       },
       "application_deadline": "2024-12-15"
-    },{
+    },
+    {
+      "_id":"6",
         "title": "Junior Education Consultant",
+        "job_thumbnail":"https://img.freepik.com/free-photo/hiring-concept-with-empty-chair_23-2149519862.jpg",
         "vacancy_count": 4,
         "job_context": "We are looking for four Associate Educational Consultants management candidates with a minimum of one year of experience. Candidates are responsible for finding genuine candidates and writing a Statement of Purpose (SOP)/Cover Letter for study abroad. Applicants must be fluent in both spoken and written English.",
         "job_responsibilities": [

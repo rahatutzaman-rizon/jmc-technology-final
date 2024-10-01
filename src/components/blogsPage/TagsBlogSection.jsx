@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 
 const TagsBlogSection = () => {
   const [categories, setCategories] = useState([]);
-  console.log(categories);
   useEffect(() => {
     fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/blogs/categories/unique`
