@@ -20,7 +20,7 @@ export default function Banner() {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setActiveIndex((prevIndex) => (prevIndex + 1) % features.length);
+      setActiveIndex((prevIndex) => (prevIndex + 1));
     }, 3000);
     return () => clearInterval(timer);
   }, []);

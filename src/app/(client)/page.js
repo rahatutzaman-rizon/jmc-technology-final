@@ -1,4 +1,5 @@
 import Banner from "../components/homepage/banner";
+import Glance from "../components/homepage/glance";
 import Service from "../components/homepage/service";
 import ServicesTabs from "../components/homepage/services";
 import TestimonialPage from "../components/homepage/testimonials";
@@ -12,6 +13,7 @@ export default function Home() {
 <MissionVision></MissionVision>
 <Service></Service>
 <ServicesTabs></ServicesTabs>
+<Glance></Glance>
 {/* <TestimonialPage></TestimonialPage> */}
 
 
