@@ -25,35 +25,35 @@ const navItemsUp = [
     href: "/dashboard",
     icon: <FaHome className="mr-2" />,
   },
-  {
-    name: "Employees",
-    href: "/employees",
-    icon: <MdOutlinePermIdentity className="mr-2" />,
-  },
-  {
-    name: "Landing Page",
-    href: "",
-    icon: <TbAntennaBars5 className="mr-2" />,
-    dropdown: [
-      {
-        name: "At A Glance",
-        href: "/dashboard/at-a-glance",
-      },
-      {
-        name: "Services",
-        href: "/dashboard/services",
-      },
-      {
-        name: "Tech Tool Boxes",
-        href: "/dashboard/tech-tool-boxes",
-      },
-    ],
-  },
-  {
-    name: "Works",
-    href: "/dashboard/works",
-    icon: <FaBriefcase className="mr-2" />,
-  },
+  // {
+  //   name: "Employees",
+  //   href: "/employees",
+  //   icon: <MdOutlinePermIdentity className="mr-2" />,
+  // },
+  // {
+  //   name: "Landing Page",
+  //   href: "",
+  //   icon: <TbAntennaBars5 className="mr-2" />,
+  //   dropdown: [
+  //     {
+  //       name: "At A Glance",
+  //       href: "/dashboard/at-a-glance",
+  //     },
+  //     {
+  //       name: "Services",
+  //       href: "/dashboard/services",
+  //     },
+  //     {
+  //       name: "Tech Tool Boxes",
+  //       href: "/dashboard/tech-tool-boxes",
+  //     },
+  //   ],
+  // },
+  // {
+  //   name: "Works",
+  //   href: "/dashboard/works",
+  //   icon: <FaBriefcase className="mr-2" />,
+  // },
   {
     name: "Blog",
     href: "",
@@ -69,21 +69,21 @@ const navItemsUp = [
       },
     ],
   },
-  {
-    name: "FAQ",
-    href: "/dashboard/faq",
-    icon: <MdQuestionMark className="mr-2" />,
-  },
+  // {
+  //   name: "FAQ",
+  //   href: "/dashboard/faq",
+  //   icon: <MdQuestionMark className="mr-2" />,
+  // },
   {
     name: "Contacts",
     href: "/dashboard/contacts",
     icon: <FaRegPaperPlane className="mr-2" />,
   },
-  {
-    name: "User",
-    href: "/dashboard/user",
-    icon: <FaUsers className="mr-2" />,
-  },
+  // {
+  //   name: "User",
+  //   href: "/dashboard/user",
+  //   icon: <FaUsers className="mr-2" />,
+  // },
   {
     name: "Career",
     href: "",
@@ -103,24 +103,24 @@ const navItemsUp = [
       },
     ],
   },
-  {
-    name: "Subscriptions",
-    href: "/dashboard/subscriptions",
-    icon: <IoMdMenu className="mr-2" />,
-  },
-  {
-    name: "Client Review",
-    href: "/dashboard/client-review",
-    icon: <FaRegStar className="mr-2" />,
-  },
+  // {
+  //   name: "Subscriptions",
+  //   href: "/dashboard/subscriptions",
+  //   icon: <IoMdMenu className="mr-2" />,
+  // },
+  // {
+  //   name: "Client Review",
+  //   href: "/dashboard/client-review",
+  //   icon: <FaRegStar className="mr-2" />,
+  // },
 ];
 
 const navItemsDown = [
-  {
-    name: "Settings",
-    href: "/dashboard/settings",
-    icon: <FaCog className="mr-2" />,
-  },
+  // {
+  //   name: "Settings",
+  //   href: "/dashboard/settings",
+  //   icon: <FaCog className="mr-2" />,
+  // },
 ];
 
 const DashBoardSideBar = ({ isSidebarOpen, openDropdown, toggleDropdown }) => {
@@ -210,54 +210,58 @@ const DashBoardSideBar = ({ isSidebarOpen, openDropdown, toggleDropdown }) => {
             })}
           </ul>
           <div>
-            <hr className="border-dashAshText my-6" />
-            <ul className="space-y-2 px-6">
-              {navItemsDown.map((item, index) => {
-                if (item.dropdown) {
-                  return (
-                    <li key={index}>
-                      <button
-                        onClick={() => toggleDropdown(item.name)}
-                        className="flex justify-between items-center w-full p-3 text-dashCaviarTitleText rounded-lg text-lg hover:bg-dashPrimary hover:text-white "
-                      >
-                        <div className="flex items-center">
+            {navItemsDown?.length > 0 && (
+              <>
+                <hr className="border-dashAshText my-6" />
+                <ul className="space-y-2 px-6">
+                  {navItemsDown.map((item, index) => {
+                    if (item.dropdown) {
+                      return (
+                        <li key={index}>
+                          <button
+                            onClick={() => toggleDropdown(item.name)}
+                            className="flex justify-between items-center w-full p-3 text-dashCaviarTitleText rounded-lg text-lg hover:bg-dashPrimary hover:text-white "
+                          >
+                            <div className="flex items-center">
+                              {item.icon}
+                              <span>{item.name}</span>
+                            </div>
+                            <IoMdArrowDropdown size={20} />
+                          </button>
+                          {openDropdown === item.name && (
+                            <ul className="pl-5 space-y-2">
+                              {item.dropdown.map((subItem, subIndex) => {
+                                return (
+                                  <li key={subIndex}>
+                                    <ActiveLink
+                                      href={subItem.href}
+                                      className="block p-2 text-dashCaviarTitleText rounded-lg text-lg hover:bg-dashPrimary hover:text-white"
+                                    >
+                                      {subItem.name}
+                                    </ActiveLink>
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          )}
+                        </li>
+                      );
+                    }
+                    return (
+                      <li key={index}>
+                        <Link
+                          href={item.href}
+                          className="flex items-center p-3 text-dashCaviarTitleText rounded-lg text-lg hover:bg-dashPrimary hover:text-white "
+                        >
                           {item.icon}
-                          <span>{item.name}</span>
-                        </div>
-                        <IoMdArrowDropdown size={20} />
-                      </button>
-                      {openDropdown === item.name && (
-                        <ul className="pl-5 space-y-2">
-                          {item.dropdown.map((subItem, subIndex) => {
-                            return (
-                              <li key={subIndex}>
-                                <ActiveLink
-                                  href={subItem.href}
-                                  className="block p-2 text-dashCaviarTitleText rounded-lg text-lg hover:bg-dashPrimary hover:text-white"
-                                >
-                                  {subItem.name}
-                                </ActiveLink>
-                              </li>
-                            );
-                          })}
-                        </ul>
-                      )}
-                    </li>
-                  );
-                }
-                return (
-                  <li key={index}>
-                    <Link
-                      href={item.href}
-                      className="flex items-center p-3 text-dashCaviarTitleText rounded-lg text-lg hover:bg-dashPrimary hover:text-white "
-                    >
-                      {item.icon}
-                      {item.name}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
+                          {item.name}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </>
+            )}
           </div>
         </nav>
       </aside>

@@ -37,7 +37,7 @@ const DashboardBody = ({ children }) => {
           />
 
           {/* Main Content starts */}
-          <div className="p-8">{children}</div>
+          <div className="p-8 overflow-hidden">{children}</div>
           {/* Main Content ends */}
         </div>
 
