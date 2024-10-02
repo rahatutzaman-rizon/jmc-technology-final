@@ -12,9 +12,9 @@ const AllProviderLayout = ({ children }) => {
     });
   }, []);
   return (
-    <>
+    <main>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </>
+    </main>
   );
 };
 
