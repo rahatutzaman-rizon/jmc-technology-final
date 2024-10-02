@@ -1,152 +1,119 @@
-"use client";
+'use client'
 
-import React, { useState } from "react";
-import Image from "next/image";
-import { Tab } from "@headlessui/react";
-import { motion } from "framer-motion";
-import { FaStar } from "react-icons/fa"; // Example icon, add more as needed
+import React from 'react'
+import { motion } from 'framer-motion'
+import Image from 'next/image'
 
 const testimonials = [
   {
     id: 1,
-    name: "Laura",
-    role: "Founder, Finding Trusted Care",
-    image: "/laura.jpg",
-    content:
-      "This development team cares about the customer and does everything to make their clients happy and satisfied with their work. They deliver on their promises, no matter how long it takes, and provide daily, detailed updates of their work upon request. Their attention to detail and commitment to excellence is truly commendable.",
+    name: 'Sarah Johnson',
+    role: 'CTO, TechInnovate',
+    image: '/placeholder.svg?height=100&width=100',
+    quote: 'This technology has revolutionized our development process. It\'s faster, more efficient, and incredibly user-friendly.',
   },
   {
     id: 2,
-    name: "Michael",
-    role: "CEO, Tech Innovations",
-    image: "/michael.jpg",
-    content:
-      "Working with this team has been an absolute pleasure. Their technical expertise is matched only by their dedication to client satisfaction. They have consistently delivered high-quality solutions that have significantly improved our operations. I highly recommend their services to anyone looking for top-tier development work.",
+    name: 'Michael Chen',
+    role: 'Lead Developer, CodeCraft',
+    image: '/placeholder.svg?height=100&width=100',
+    quote: 'I\'ve never seen such a powerful yet intuitive platform. It\'s changed the way we approach problem-solving.',
   },
   {
     id: 3,
-    name: "Sarah",
-    role: "Marketing Director, Global Reach",
-    image: "/sarah.jpg",
-    content:
-      "I have worked with many development teams over the years, but this one stands out. Their ability to understand our unique needs and translate them into functional, user-friendly solutions is unparalleled. They are not just coders; they are true partners in our success.",
+    name: 'Emily Rodriguez',
+    role: 'Product Manager, FutureTech',
+    image: '/placeholder.svg?height=100&width=100',
+    quote: 'The support and documentation are top-notch. It\'s rare to find a tool that\'s both cutting-edge and well-supported.',
   },
-];
+ 
+]
 
-const TestimonialPage = () => {
-  const [selectedIndex, setSelectedIndex] = useState(0);
+const CurvedBackground = () => (
+  <div className="absolute inset-0 overflow-hidden">
+    <svg
+      className="absolute bottom-0 left-0 w-full h-full"
+      viewBox="0 0 1440 800"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M0 800V0H1440V800C1080 650 360 950 0 800Z"
+        fill="url(#gradient)"
+      />
+      <defs>
+        <linearGradient id="gradient" x1="720" y1="0" x2="720" y2="800" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#4F46E5" stopOpacity="0.05" />
+          <stop offset="1" stopColor="#4F46E5" stopOpacity="0.2" />
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+)
 
+const TestimonialCard = ({ testimonial }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 50 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    className="bg-white rounded-lg shadow-lg p-6 transform hover:scale-105 transition-transform duration-300"
+  >
+    <div className="flex items-center mb-4">
+      <Image
+        src={testimonial.image}
+        alt={testimonial.name}
+        width={64}
+        height={64}
+        className="rounded-full border-2 border-indigo-300"
+      />
+      <div className="ml-4">
+        <h3 className="text-lg font-semibold text-gray-900">{testimonial.name}</h3>
+        <p className="text-indigo-600 text-sm">{testimonial.role}</p>
+      </div>
+    </div>
+    <p className="text-gray-700 text-base italic">&ldquo;{testimonial.quote}&rdquo;</p>
+  </motion.div>
+)
+
+export default function Testimonials() {
   return (
-    <div className="relative bg-gradient-to-br from-blue-100 to-blue-300 min-h-screen">
-      <motion.div
-        className="absolute top-0 left-0 w-32 sm:w-64 h-32 sm:h-64 bg-gradient-to-br from-teal-300 to-emerald-300 rounded-br-full opacity-50"
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: 1, opacity: 0.5 }}
-        transition={{ duration: 1, ease: "easeOut" }}
-      />
-      <motion.div
-        className="absolute bottom-0 right-0 w-48 sm:w-96 h-48 sm:h-96 bg-gradient-to-tl from-indigo-300 to-purple-300 rounded-tl-full opacity-50"
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: 1, opacity: 0.5 }}
-        transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
-      />
-
-      <div className="max-w-7xl mx-auto relative z-10 mt-8 sm:mt-12">
+    <div className="relative bg-gray-50 py-16 px-6 sm:px-8 lg:px-10">
+      <CurvedBackground />
+      <div className="max-w-7xl mx-auto relative z-10">
         <motion.div
-          className="text-center mb-8 sm:mb-12"
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
+          className="text-center mb-12"
         >
-          <h1 className="text-3xl sm:text-5xl font-bold text-emerald-700">Client Testimonials</h1>
-          <p className="text-lg text-gray-600">Words that describe our quality and keep us motivated</p>
+          <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl">
+            What Our Clients Say
+          </h1>
+          <p className="mt-4 max-w-xl mx-auto text-gray-500 text-lg">
+            Hear from professionals how our solution is impacting their businesses.
+          </p>
         </motion.div>
 
-        <Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
-          <Tab.List className="flex space-x-4 mb-12 justify-center">
-            {testimonials.map((testimonial) => (
-              <Tab
-                key={testimonial.id}
-                className={({ selected }) =>
-                  `relative group w-full max-w-xs rounded-lg py-3 px-6 text-sm font-medium leading-5 transition-all duration-300
-                  ${selected ? "bg-gradient-to-r from-green-400 to-blue-500 text-white shadow-lg" : "bg-white text-blue-600 hover:bg-gray-100"}
-                  `
-                }
-              >
-                {testimonial.name}
-                {selected && (
-                  <motion.div
-                    className="absolute inset-0 rounded-lg border-2 border-white opacity-50 group-hover:opacity-100"
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                )}
-              </Tab>
-            ))}
-          </Tab.List>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {testimonials.map((testimonial) => (
+            <TestimonialCard key={testimonial.id} testimonial={testimonial} />
+          ))}
+        </div>
 
-          <Tab.Panels>
-            {testimonials.map((testimonial, idx) => (
-              <Tab.Panel
-                key={idx}
-                className="rounded-xl bg-white p-6 shadow-lg transition-all duration-300 ease-in-out"
-              >
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-                  <motion.div
-                    className="md:col-span-1"
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.6 }}
-                  >
-                    <Image
-                      src={testimonial.image}
-                      alt={testimonial.name}
-                      width={300}
-                      height={300}
-                      className="rounded-full mx-auto shadow-xl hover:scale-105 transform transition-all duration-300"
-                    />
-                  </motion.div>
-                  <motion.div
-                    className="md:col-span-2"
-                    initial={{ opacity: 0, x: -50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8 }}
-                  >
-                    <h2 className="text-3xl font-bold text-gray-800 mb-2">
-                      {testimonial.name}
-                      <FaStar className="inline-block text-yellow-500 ml-2" />
-                    </h2>
-                    <p className="text-blue-600 font-medium mb-4">
-                      {testimonial.role}
-                    </p>
-                    <p className="text-gray-700 text-lg leading-relaxed">
-                      {testimonial.content}
-                    </p>
-                  </motion.div>
-                </div>
-              </Tab.Panel>
-            ))}
-          </Tab.Panels>
-        </Tab.Group>
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.8 }}
+          className="mt-16 text-center"
+        >
+          <a
+            href="#"
+            className="inline-flex items-center px-6 py-3 border border-transparent text-lg font-semibold rounded-full text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-300"
+          >
+            Join Us Today
+          </a>
+        </motion.div>
       </div>
-
-      {/* Curved Line SVG */}
-      <svg
-        className="absolute bottom-0 left-0 w-full"
-        viewBox="0 0 1440 320"
-        preserveAspectRatio="none"
-      >
-        <motion.path
-          fill="white"
-          d="M0,96C48,128,144,192,240,213.3C336,235,432,213,528,181.3C624,149,720,107,816,101.3C912,96,1008,128,1104,138.7C1200,149,1296,139,1392,133.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 1 }}
-          transition={{ duration: 1.5, ease: "easeInOut" }}
-        />
-      </svg>
     </div>
-  );
-};
-
-export default TestimonialPage;
+  )
+}
