@@ -21,6 +21,7 @@ module.exports = {
         dashSideNavText: "#52525B", // Text color
         careerRed: "#FF5857",
         contactBlue: "#1A60B0",
+        contactBlueHover: "#19395e",
       },
     },
   },

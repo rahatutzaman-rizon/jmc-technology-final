@@ -93,7 +93,7 @@ const ContactUsPageComp = () => {
                 ></textarea>
                 <button
                   type="submit"
-                  className="w-full bg-contactBlue text-white p-2 rounded-md hover:bg-[#19395e] transition duration-300"
+                  className="w-full bg-contactBlue text-white p-2 rounded-md hover:bg-dcfdfs transition duration-300"
                 >
                   Send
                 </button>
