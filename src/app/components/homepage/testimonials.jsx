@@ -106,12 +106,7 @@ export default function Testimonials() {
           transition={{ duration: 0.5, delay: 0.8 }}
           className="mt-16 text-center"
         >
-          <a
-            href="#"
-            className="inline-flex items-center px-6 py-3 border border-transparent text-lg font-semibold rounded-full text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-300"
-          >
-            Join Us Today
-          </a>
+          
         </motion.div>
       </div>
     </div>

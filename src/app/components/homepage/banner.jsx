@@ -75,16 +75,16 @@ export default function Banner() {
                   opacity: 1, 
                   y: 0,
                   scale: activeIndex === index ? 1.05 : 1,
-                  color: activeIndex === index ? feature.color : "text-gray-600"
                 }}
                 transition={{ duration: 0.5, delay: 0.4 + index * 0.2 }}
                 className={`flex items-center mb-4 ${activeIndex === index ? 'font-bold' : ''}`}
               >
                 <feature.icon className={`mr-2 ${feature.color}`} size={24} />
-                <h3 className="text-xl sm:text-2xl">{feature.title}</h3>
+                <h3 className={`text-xl sm:text-2xl ${activeIndex === index ? feature.color : 'text-gray-700'}`}>{feature.title}</h3>
               </motion.div>
             ))}
-          
+
+
             <motion.div
               className="relative inline-block"
               whileHover={{ scale: 1.05 }}

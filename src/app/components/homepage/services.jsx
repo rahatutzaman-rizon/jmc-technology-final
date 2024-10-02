@@ -82,26 +82,8 @@ const services = [
       // { icon: <FaAdobe className="w-8 h-8" />, name: 'Adobe XD' },
     ],
   },
-  // {
-  //   name: 'Graphic Design',
-  //   icon: <FaPaintBrush className="w-12 h-12" />,
-  //   description: 'Creating visually appealing designs for various mediums and purposes.',
-  //   techIcons: [
-  //     { icon: <FaAdobe className="w-8 h-8" />, name: 'Adobe Illustrator' },
-  //     { icon: <FaAdobe className="w-8 h-8" />, name: 'Adobe Photoshop' },
-  //     { icon: <FaAdobe className="w-8 h-8" />, name: 'Adobe InDesign' },
-  //   ],
-  // },
-  // {
-  //   name: 'Motion Graphic Design',
-  //   icon: <FaVideo className="w-12 h-12" />,
-  //   description: 'Bringing designs to life with captivating animations and visual effects.',
-  //   techIcons: [
-  //     { icon: <FaAdobe className="w-8 h-8" />, name: 'After Effects' },
-  //     { icon: <FaAdobe className="w-8 h-8" />, name: 'Premiere Pro' },
-  //     { icon: <FaAdobe className="w-8 h-8" />, name: 'Cinema 4D' },
-  //   ],
-  // },
+  
+  
   {
     name: 'Digital Marketing',
     icon: <FaBullhorn className="w-12 h-12" />,

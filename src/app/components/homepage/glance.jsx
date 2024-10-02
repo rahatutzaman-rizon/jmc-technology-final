@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaProjectDiagram, FaStar, FaTrophy, FaBook } from "react-icons/fa";
+import CountUp from "react-countup";
 
 const AtAGlance = () => {
   const data = [
@@ -48,7 +49,13 @@ const AtAGlance = () => {
                   delay: 0.5 + index * 0.1,
                 }}
               >
-                {item.value}+
+                {/* Add CountUp animation */}
+                <CountUp
+                  start={0}
+                  end={item.value}
+                  duration={2.5}
+                  delay={0.5 + index * 0.2}
+                />+
               </motion.div>
               <div className="text-sm md:text-base text-gray-600 mt-1">
                 {item.label}
@@ -57,12 +64,6 @@ const AtAGlance = () => {
           </motion.div>
         ))}
       </div>
-
-      {/* Updated SVG curves with lighter colors */}
-       
-
-
-       
     </div>
   );
 };
