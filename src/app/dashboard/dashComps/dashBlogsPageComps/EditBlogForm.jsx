@@ -47,6 +47,8 @@ const EditBlogForm = ({ blog }) => {
     }
 
     try {
+      console.log("formData", formData);
+      console.log("formDataToSubmit", formDataToSubmit);
       const token = localStorage.getItem("token");
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/blogs/${blog?._id}`,

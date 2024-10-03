@@ -130,7 +130,7 @@ const AddBlogForm = () => {
     if (image) {
       formData.append("image", image);
     }
-
+    console.log(formData);
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(

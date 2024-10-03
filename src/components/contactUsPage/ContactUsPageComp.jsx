@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import axios from "axios";
 
 const ContactUsPageComp = () => {
   const [form, setForm] = useState({
@@ -9,46 +10,55 @@ const ContactUsPageComp = () => {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Submit form logic here (e.g., API call)
-    setSubmitted(true);
+    try {
+      console.log("form", form);
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/contact-us`,
+        form
+      );
+      setSubmitted(true);
+      setError(""); // Clear any previous errors
+    } catch (err) {
+      setError("There was an error submitting your message. Please try again.");
+    }
   };
 
   const data = {
     contacts: {
-      showrooms: [
-        { name: "JMC Showroom I", phone: "+880 13212 10001" },
-        { name: "JMC Showroom II", phone: "+880 13212 10002" },
-        { name: "JMC Showroom III", phone: "+880 13212 10003" },
-        { name: "JMC Showroom IV", phone: "+880 13212 10004" },
-        { name: "JMC Showroom V", phone: "+880 13212 10005" },
+      showrooms: [],
+      hotline: [
+        { name: "JMC Technology Hotline", phone: "+880 13212 10093" },
+        { name: "JMC Group Hotline", phone: "+880 13099 91999" },
       ],
-      hotline: { name: "JMC Group Hotline", phone: "+880 13099 91999" },
-      email: { department: "Administration", address: "info@jmcmedicine.com" },
-      website: "www.jmcmedicine.com",
+      email: { department: "Administration", address: "hello@jmc.technology" },
+      website: "www.jmc.technology",
       social_media: {
-        facebook: "www.facebook.com/JMCMedicine",
-        instagram: "www.instagram.com/jmc.medicine",
-        linkedin: "www.linkedin.com/company/jmcmedicine",
-        youtube: "www.youtube.com/@JMCMedicineCorner1",
-        tiktok: "www.tiktok.com/@jmc.medicine",
-        twitter: "www.x.com/jmcmedicinebd",
-        threads: "www.threads.net/@jmc.medicine",
+        facebook: "www.facebook.com/JMCTechBD",
+        instagram: "www.instagram.com/jmctechnologyltd",
+        linkedin: "www.linkedin.com/company/jmctech",
+        youtube: "https://www.youtube.com/@jmctechnologyltd",
+        tiktok: "www.tiktok.com/@jmctechnologyltd",
+        twitter: "www.x.com/jmctechnology24",
+        threads: "www.threads.net/@jmctechnologyltd",
       },
     },
+    address:
+      "Flat# 9B, Level# 09, Main Road, Block# H, Aftabnagar, Badda, Dhaka-1212, Bangladesh",
   };
 
   return (
     <div className="bg-[#faf6f6] py-12">
-      <div className="border max-w-5xl mx-auto p-8  bg-white">
-        <div className="flex justify-center items-center  ">
-          <div className="bg-white  border  w-full  flex flex-col lg:flex-row gap-8 ">
+      <div className="border max-w-5xl mx-auto p-8 bg-white">
+        <div className="flex justify-center items-center">
+          <div className="bg-white border w-full flex flex-col lg:flex-row gap-8">
             {/* Form Section */}
             <div className="w-full lg:w-1/2 lg:p-6">
               <h2 className="text-xl font-bold mb-4 mt-6 lg:mt-0 text-center">
@@ -98,7 +108,12 @@ const ContactUsPageComp = () => {
                   Send
                 </button>
                 {submitted && (
-                  <p className="text-green-500 font-bold mt-2">Success!</p>
+                  <p className="text-green-500 font-bold mt-2">
+                    <small>Success!</small>
+                  </p>
+                )}
+                {error && (
+                  <p className="text-red-500 font-bold mt-2">{error}</p>
                 )}
               </form>
             </div>
@@ -109,19 +124,18 @@ const ContactUsPageComp = () => {
                 Contact Information
               </h2>
               <div className="lg:p-8">
-                <p className="mb-4">
-                  Address: 3rd floor, House 39, Road 126, Islam Mansion, Gulshan
-                  1 Circle (Sonali Bank building), Dhaka 1212, Bangladesh.
-                </p>
+                <p className="mb-4">Address: {data.address}</p>
                 <div className="mb-4">
-                  {data.contacts.showrooms.map((showroom, index) => (
+                  {data.contacts.showrooms?.map((showroom, index) => (
                     <p key={index}>
                       {showroom.name}: {showroom.phone}
                     </p>
                   ))}
-                  <p>
-                    {data.contacts.hotline.name}: {data.contacts.hotline.phone}
-                  </p>
+                  {data.contacts.hotline.map((line, index) => (
+                    <p key={index}>
+                      {line.name}: {line.phone}
+                    </p>
+                  ))}
                 </div>
                 <p className="mb-4">
                   Email:{" "}
@@ -144,7 +158,6 @@ const ContactUsPageComp = () => {
                   </a>
                 </p>
                 <h3 className="font-bold mt-4 mb-2">Social Media:</h3>
-
                 <ul className="space-y-1">
                   {Object.entries(data.contacts.social_media).map(
                     ([platform, link], index) => (
@@ -173,10 +186,9 @@ const ContactUsPageComp = () => {
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.4953412447626!2d90.44234737533637!3d23.765369178660077!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8a260534d25e4a87%3A0x36028b95229d0743!2sJMC%20Technology%20Limited!5e0!3m2!1sen!2sbd!4v1724913040926!5m2!1sen!2sbd"
             width="100%"
             height="450"
-            //   style="border:0;"
-            allowfullscreen=""
+            allowFullScreen=""
             loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
+            referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
         </div>
       </div>

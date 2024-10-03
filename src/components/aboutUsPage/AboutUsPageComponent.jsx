@@ -2,7 +2,7 @@ import React from "react";
 import WhoWeAreComp from "./WhoWeAreComp";
 import { poppins } from "@/app/layout";
 import AboutOurMissionVission from "./AboutOurMissionVission";
-import OurInnovativeSolutions from "./OurInnovativeSolutions";
+import OurDreams from "./OurDreams";
 import ComprehensiveSupport from "./ComprehensiveSupport";
 
 const AboutUsPageComponent = () => {
@@ -46,12 +46,9 @@ const AboutUsPageComponent = () => {
               data-aos="fade-left"
               className="text-white my-6 md:font-bold text-sm md:text-base max-w-2xl"
             >
-              JMC Medicine Corner Limited is your trusted partner in healthcare,
-              conveniently located with five outlets across Dhaka and ambitious
-              plans to expand throughout Bangladesh (64 districts). We are a
-              licensed and established company dedicated to illuminating the
-              path to better health for our community. Your Wellbeing, Our
-              Passion
+              JMC Technology LTD. is a proud member of Bangladesh Association of
+              Software and Information Services (BASIS), Where Innovation Meets
+              Impact, Igniting Your Digital Odyssey
             </p>
           </div>
         </div>
@@ -59,7 +56,7 @@ const AboutUsPageComponent = () => {
       {/* who we are */}
       <WhoWeAreComp />
       <AboutOurMissionVission />
-      <OurInnovativeSolutions />
+      <OurDreams />
       <ComprehensiveSupport />
     </div>
   );

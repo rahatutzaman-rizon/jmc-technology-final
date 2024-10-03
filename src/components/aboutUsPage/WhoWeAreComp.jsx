@@ -26,25 +26,10 @@ const WhoWeAreComp = () => {
               Who We Are
             </h1>
             <p className="mb-8 leading-relaxed text-justify">
-              We believe wellness should be accessible to everyone. That&apos;s
-              why we offer a comprehensive range of pharmaceutical services,
-              including: Essential medications and health products Expert
-              consultations with our knowledgeable staff Convenient online
-              ordering and delivery Personalized care plans tailored to your
-              unique needs More Than Just a Pharmacy JMC Medicine Corner Limited
-              goes beyond dispensing medication. We are committed to: Promoting
-              health education to empower our community with knowledge
-              Prioritizing affordability to ensure everyone can access the care
-              they need Delivering exceptional customer service with a focus on
-              empathy and respect We aspire to be the leading name in
-              pharmaceutical care within Bangladesh. Through innovation,
-              community engagement, and a relentless focus on excellence, we
-              strive to: Set new standards in customer service and patient care
-              Continuously improve health outcomes through evidence-based
-              practices Foster a culture of health and wellness for every
-              individual we serve Join us on our mission to illuminate a path to
-              better health. Visit your nearest JMC Medicine Corner Limited
-              today!
+              We&apos;re fueled by the thrill of seeing your vision come to
+              life, watching your business flourish and your impact expand. Join
+              us on this exciting odyssey, where innovation meets impact, and
+              dreams become reality.
             </p>
           </div>
         </div>

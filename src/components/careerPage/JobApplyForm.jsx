@@ -266,6 +266,8 @@ const JobApplyForm = ({ job }) => {
     formDataToSend.append("coverLetter", formData.coverLetter);
     formDataToSend.append("resume", formData.resume);
 
+    console.log("formData", formData);
+    console.log("formDataToSend", formDataToSend);
     try {
       const response = await axios.post("/jobs/apply", formDataToSend, {
         headers: {

@@ -14,10 +14,9 @@ const AboutOurMissionVission = () => {
               Our Mission
             </h1>
             <p className="mb-8 leading-relaxed text-justify">
-              JMC Medicine Corner Limited is committed to illuminating the path
-              to better health through exceptional pharmaceutical services,
-              personalized care, and community-focused health solutions, making
-              wellness accessible to everyone
+              To revolutionize software development with a focus on
+              sustainability, minimizing environmental impact, and promoting
+              responsible resource utilization.
             </p>
           </div>
           <div
@@ -28,10 +27,9 @@ const AboutOurMissionVission = () => {
               Our Vision
             </h1>
             <p className="mb-8 leading-relaxed text-justify">
-              Our vision is to be a leader in pharmaceutical care, known for our
-              innovative solutions, dedication to health education, and
-              exceptional customer service, contributing to a healthier future
-              for all
+              To be the global leader in software innovation, transforming
+              industries and enhancing lives through sustainable and impactful
+              technological advancements.
             </p>
           </div>
         </div>
