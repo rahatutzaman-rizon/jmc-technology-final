@@ -20,52 +20,86 @@ export default function Banner() {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setActiveIndex((prevIndex) => (prevIndex + 1));
+      setActiveIndex((prevIndex) => (prevIndex + 1) % features.length);
     }, 3000);
     return () => clearInterval(timer);
-  }, []);
+  }, );
 
   return (
-    <div className="relative bg-gradient-to-br from-teal-50 via-white to-indigo-50 p-4 sm:p-8 overflow-hidden min-h-screen">
-      {/* Background design elements */}
+    <div className="relative bg-gradient-to-br from-teal-50 via-white to-indigo-50 p-4 sm:p-8 overflow-hidden min-h-screen ">
+      {/* Enhanced background animations */}
       <motion.div
-        className="absolute top-0 left-0 w-32 sm:w-64 h-32 sm:h-64 bg-gradient-to-br from-teal-300 to-emerald-300 rounded-br-full opacity-50"
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: 1, opacity: 0.5 }}
-        transition={{ duration: 1, ease: "easeOut" }}
+        className="absolute inset-0 opacity-20"
+        animate={{
+          backgroundImage: [
+            'radial-gradient(circle, #4fd1c5 1px, transparent 1px)',
+            'radial-gradient(circle, #4299e1 1px, transparent 1px)',
+            'radial-gradient(circle, #9f7aea 1px, transparent 1px)',
+          ],
+        }}
+        transition={{ duration: 10, repeat: Infinity, repeatType: "reverse" }}
+        style={{
+          backgroundSize: '20px 20px',
+        }}
       />
       <motion.div
-        className="absolute bottom-0 right-0 w-48 sm:w-96 h-48 sm:h-96 bg-gradient-to-tl from-indigo-300 to-purple-300 rounded-tl-full opacity-50"
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: 1, opacity: 0.5 }}
-        transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
+        className="absolute top-0 left-0 w-1/3 h-1/3 bg-gradient-to-br from-teal-300 to-emerald-300 rounded-br-full opacity-30"
+        animate={{
+          scale: [1, 1.2, 1],
+          rotate: [0, 10, 0],
+        }}
+        transition={{ duration: 10, repeat: Infinity, repeatType: "reverse" }}
+      />
+      <motion.div
+        className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-gradient-to-tl from-indigo-300 to-purple-300 rounded-tl-full opacity-30"
+        animate={{
+          scale: [1, 1.1, 1],
+          rotate: [0, -5, 0],
+        }}
+        transition={{ duration: 8, repeat: Infinity, repeatType: "reverse" }}
       />
 
-      <div className="max-w-7xl mx-auto relative z-10 mt-8 sm:mt-12">
+      <div className="max-w-7xl mx-auto relative z-10 mt-12 sm:mt-16">
         <motion.div
-          className="text-center mb-8 sm:mb-12"
+          className="text-center mb-12 sm:mb-16"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-3xl sm:text-5xl font-bold text-emerald-700">JMC Technology LTD.</h1>
+          <h1 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-indigo-600">JMC Technology LTD.</h1>
         </motion.div>
 
-        <div className="flex flex-col lg:flex-row items-center justify-between">
+        <div className="flex flex-col lg:flex-row items-center justify-between lg:space-x-12">
           <motion.div 
-            className="lg:w-1/2 mb-8 lg:mb-0"
+            className="lg:w-1/2 mb-12 lg:mb-0"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <motion.h2
-              className="text-2xl sm:text-4xl font-bold text-indigo-400 to-purple-100 mb-6"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+            {/* <motion.div
+              className="relative p-8 rounded-2xl overflow-hidden mb-8"
+              initial={{ background: "linear-gradient(45deg, #4fd1c5, #4299e1)" }}
+              animate={{ background: ["linear-gradient(45deg, #4fd1c5, #4299e1)", "linear-gradient(45deg, #4299e1, #9f7aea)", "linear-gradient(45deg, #9f7aea, #4fd1c5)"] }}
+              transition={{ duration: 6, repeat: Infinity, repeatType: "reverse" }}
             >
-              Crafting software solutions that empower your business to thrive
-            </motion.h2>
+              <motion.div
+                className="absolute inset-0"
+                style={{
+                  background: "url('data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.2'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')",
+                }}
+                animate={{
+                  x: [0, 60, 0],
+                  y: [0, 60, 0],
+                }}
+                transition={{ duration: 8, repeat: Infinity, repeatType: "loop" }}
+              />
+              <h2 className="text-xl sm:text-xl font-bold text-white relative z-10 leading-tight">
+                Crafting software solutions that empower your business to thrive
+              </h2>
+            </motion.div> */}
+            <h2 className="text-2xl sm:text-2xl font-bold text-black relative z-10 leading-tight">
+                Crafting software solutions that empower your business to thrive
+              </h2>
 
             {features.map((feature, index) => (
               <motion.div
@@ -77,21 +111,26 @@ export default function Banner() {
                   scale: activeIndex === index ? 1.05 : 1,
                 }}
                 transition={{ duration: 0.5, delay: 0.4 + index * 0.2 }}
-                className={`flex items-center mb-4 ${activeIndex === index ? 'font-bold' : ''}`}
+                className={`flex items-center mb-6 ${activeIndex === index ? 'font-bold' : ''}`}
               >
-                <feature.icon className={`mr-2 ${feature.color}`} size={24} />
-                <h3 className={`text-xl sm:text-2xl ${activeIndex === index ? feature.color : 'text-gray-700'}`}>{feature.title}</h3>
+                <motion.div
+                  className={`mr-4 p-3 rounded-full ${feature.color.replace('text-', 'bg-')} bg-opacity-20`}
+                  whileHover={{ scale: 1.1, rotate: 360 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <feature.icon className={feature.color} size={28} />
+                </motion.div>
+                <h3 className={`text-2xl sm:text-2xl ${activeIndex === index ? feature.color : 'text-gray-700'}`}>{feature.title}</h3>
               </motion.div>
             ))}
 
-
             <motion.div
-              className="relative inline-block"
+              className="relative inline-block mt-8"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               <motion.span 
-                className="bg-gradient-to-r from-emerald-500 to-indigo-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full shadow-lg inline-block text-lg sm:text-xl font-semibold cursor-pointer"
+                className="bg-gradient-to-r from-emerald-500 to-indigo-500 text-white px-8 sm:px-10 py-4 sm:py-5 rounded-full shadow-lg inline-block text-xl sm:text-2xl font-semibold cursor-pointer"
               >
                 Pioneering Excellence for 2+ Years
               </motion.span>
@@ -106,42 +145,44 @@ export default function Banner() {
                   repeatType: "reverse",
                 }}
               >
-                <ChevronRight size={24} className="text-white" />
+                <ChevronRight size={28} className="text-white" />
               </motion.div>
             </motion.div>
           </motion.div>
           <motion.div 
-            className="lg:w-1/2 relative mt-8 lg:mt-0"
+            className="lg:w-1/2 relative"
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <Image
-              src={banner}
-              alt="Innovative workspace"
-              className="rounded-xl shadow-2xl"
-              height={700}
-              width={900}
-            />
-            <motion.button
-              whileHover={{ scale: 1.1, rotate: 90 }}
-              whileTap={{ scale: 0.9 }}
-              animate={{ 
-                scale: [1, 1.1, 1],
-                rotate: [0, 0, 360],
-                boxShadow: ["0 0 0 rgba(16, 185, 129, 0)", "0 0 20px rgba(16, 185, 129, 0.5)", "0 0 0 rgba(16, 185, 129, 0)"],
-              }}
-              transition={{
-                duration: 3,
-                ease: "easeInOut",
-                times: [0, 0.5, 1],
-                repeat: Infinity,
-              }}
-              onClick={() => setShowVideo(true)}
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-full p-4 shadow-lg"
-            >
-              <PlayCircle size={48} className="text-emerald-600" />
-            </motion.button>
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+              <Image
+                src={banner}
+                alt="Innovative workspace"
+                layout="responsive"
+                width={16}
+                height={9}
+                objectFit="cover"
+              />
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                animate={{ 
+                  scale: [1, 1.1, 1],
+                  boxShadow: ["0 0 0 rgba(16, 185, 129, 0)", "0 0 30px rgba(16, 185, 129, 0.7)", "0 0 0 rgba(16, 185, 129, 0)"],
+                }}
+                transition={{
+                  duration: 3,
+                  ease: "easeInOut",
+                  times: [0, 0.5, 1],
+                  repeat: Infinity,
+                }}
+                onClick={() => setShowVideo(true)}
+                className="absolute top-1/3 left-1/3 transform -translate-x-1/2 -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-6 shadow-lg"
+              >
+                <PlayCircle size={60} className="text-emerald-600" />
+              </motion.button>
+            </div>
           </motion.div>
         </div>
 
@@ -154,7 +195,7 @@ export default function Banner() {
               exit={{ opacity: 0 }}
             >
               <motion.div 
-                className="bg-black rounded-2xl w-full max-w-7xl h-[80vh] p-4"
+                className="bg-black rounded-2xl w-full max-w-7xl h-[80vh] p-6"
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
@@ -190,7 +231,7 @@ export default function Banner() {
         </AnimatePresence>
       </div>
 
-      {/* Curved bottom design */}
+      {/* Enhanced curved bottom design */}
       <svg
         className="absolute bottom-0 left-0 w-full"
         viewBox="0 0 1440 320"

@@ -5,41 +5,40 @@ import { motion } from 'framer-motion';
 import { ShoppingCart, GraduationCap, Building2, Stethoscope, Banknote, Factory, Briefcase, Heart, Film, Shirt, Dumbbell } from 'lucide-react';
 
 const industries = [
-  { name: 'eCommerce', Icon: ShoppingCart, color: '#FF6B6B' },
-  { name: 'Education', Icon: GraduationCap, color: '#4ECDC4' },
-  { name: 'Real Estate', Icon: Building2, color: '#45B7D1' },
-  { name: 'Healthcare', Icon: Stethoscope, color: '#F9DB6D' },
-  { name: 'Fintech', Icon: Banknote, color: '#FF8C42' },
-  { name: 'Manufacturing', Icon: Factory, color: '#98DFAF' },
-  { name: 'Professional Services', Icon: Briefcase, color: '#5D5DFF' },
-  { name: 'Non-Profit', Icon: Heart, color: '#FF6B6B' },
-  { name: 'Entertainment', Icon: Film, color: '#6C63FF' },
-  { name: 'Fashion', Icon: Shirt, color: '#FFA69E' },
-  { name: 'Sports & Fitness', Icon: Dumbbell, color: '#84DCC6' },
+  { name: 'eCommerce', Icon: ShoppingCart, color: '#D32F2F' },
+  { name: 'Education', Icon: GraduationCap, color: '#1565C0' },
+  { name: 'Real Estate', Icon: Building2, color: '#4527A0' },
+  { name: 'Healthcare', Icon: Stethoscope, color: '#00838F' },
+  { name: 'Fintech', Icon: Banknote, color: '#2E7D32' },
+  { name: 'Manufacturing', Icon: Factory, color: '#EF6C00' },
+  { name: 'Professional Services', Icon: Briefcase, color: '#00C2FD' },
+  { name: 'Non-Profit', Icon: Heart, color: '#C2185B' },
+  { name: 'Entertainment', Icon: Film, color: '#0277BD' },
+  { name: 'Fashion', Icon: Shirt, color: '#827717' },
+  { name: 'Sports & Fitness', Icon: Dumbbell, color: '#1B5E20' },
 ];
 
 const IndustryCard = ({ name, Icon, color }) => {
   return (
     <motion.div
-      className="bg-white rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ease-in-out h-full"
-      whileHover={{ 
-       
-        boxShadow: `0 4px 6px -1px ${color}40, 0 2px 4px -1px ${color}30`,
+      className="bg-white rounded-xl overflow-hidden cursor-pointer transition-all duration-300 ease-in-out h-full shadow-lg"
+      whileHover={{
+        scale: 1.05,
+        boxShadow: `0 10px 20px -10px ${color}80, 0 4px 8px -4px ${color}60`,
         borderColor: color
       }}
-      style={{ border: `2px solid ${color}` }}
+      style={{ border: `3px solid ${color}` }}
     >
-      <div className="flex flex-col items-center justify-center p-6 h-full">
+      <div className="flex flex-col items-center justify-center p-8 h-full">
         <motion.div
-          className="mb-4"
-          whileHover={{ color: 'black' }}
+          className="mb-6"
+          whileHover={{ scale: 1.1 }}
           style={{ color }}
         >
-          <Icon className="w-16 h-16" />
+          <Icon className="w-20 h-20" />
         </motion.div>
         <motion.h3 
-          className="text-xl font-semibold text-center"
-          whileHover={{ color: 'black' }}
+          className="text-2xl font-bold text-center"
           style={{ color }}
         >
           {name}
@@ -51,24 +50,24 @@ const IndustryCard = ({ name, Icon, color }) => {
 
 export default function IndustriesGrid() {
   return (
-    <div className="bg-gray-100 py-16 px-4 sm:px-6 lg:px-8">
+    <div className="bg-gradient-to-br from-gray-100 to-gray-200 py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Industries We Serve</h2>
-          <p className="text-xl text-gray-700">
-            Expand your business with our Digital Agency expertise
+          <h2 className="text-5xl font-extrabold text-gray-900 mb-6">Industries We Serve</h2>
+          <p className="text-2xl text-gray-700 max-w-3xl mx-auto">
+            Expand your business with our cutting-edge Digital Agency expertise
           </p>
         </motion.div>
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10"
         >
           {industries.map((industry, index) => (
             <motion.div

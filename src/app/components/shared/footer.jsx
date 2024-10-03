@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube, FaTiktok, FaTwitter, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaGlobe } from 'react-icons/fa';
 import { SiThreads } from 'react-icons/si';
+import logo from "../../../assets/client/tech1.png"
 
 const EnhancedFooter = () => {
   return (
@@ -42,7 +43,7 @@ const EnhancedFooter = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/privacy-policy" className="hover:text-blue-400 transition duration-300 flex items-center">
+                <Link href="/privacy" className="hover:text-blue-400 transition duration-300 flex items-center">
                   <span className="mr-2">▸</span> Privacy Policy
                 </Link>
               </li>
@@ -81,8 +82,8 @@ const EnhancedFooter = () => {
           </div>
         </div>
         <div className="mt-8 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center">
-          <div className="mb-4 md:mb-0 bg-white p-2 rounded-lg">
-            <Image src="/logo.png" alt="JMC Technology Logo" width={150} height={50} />
+          <div className="mb-4 md:mb-0  p-2 rounded-lg  ">
+            <Image src={logo} alt="JMC Technology Logo" width={180} height={100} />
           </div>
           <div className="flex items-center space-x-4">
             <div className="bg-white p-2 rounded-lg">

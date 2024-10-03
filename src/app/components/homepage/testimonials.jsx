@@ -51,7 +51,7 @@ const testimonials = [
 ];
 
 const TestimonialCard = ({ testimonial }) => (
-  <div className="bg-white rounded-xl shadow-lg p-6 max-w-2xl mx-auto relative overflow-hidden">
+  <div className="bg-white rounded-xl shadow-lg p-6 max-w-3xl mx-auto relative overflow-hidden">
     <div className="relative z-10">
       <div className="flex items-center mb-4">
         <Image

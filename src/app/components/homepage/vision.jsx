@@ -6,7 +6,7 @@ import { Lightbulb, Globe, Leaf } from 'lucide-react';
 
 const MissionVision = () => {
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 p-8 overflow-hidden">
+    <div className="relative min-h-screen  bg-gradient-to-br from-indigo-50 via-white to-purple-50 p-8 overflow-hidden">
       {/* Top left design element */}
       {/* <motion.div
         className="absolute top-0 left-0 w-96 h-96"
