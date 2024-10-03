@@ -1,0 +1,29 @@
+{
+    "category": [
+      {
+        "id": 2,
+        "category_name": "Software"
+      },
+      {
+        "id": 3,
+        "category_name": "IT"
+      }
+    ],
+    "pagination": {
+      "current_page": 1,
+      "last_page": 1,
+      "per_page": 100,
+      "from": 1,
+      "to": 2,
+      "total": 2,
+      "next_page_url": null,
+      "prev_page_url": null,
+      "links": {
+        "first": "https://jmctl-api.bdcare.vip/api/blog/category/list/100?page=1",
+        "last": "https://jmctl-api.bdcare.vip/api/blog/category/list/100?page=1",
+        "prev": null,
+        "next": null
+      }
+    },
+    "status": 200
+  }

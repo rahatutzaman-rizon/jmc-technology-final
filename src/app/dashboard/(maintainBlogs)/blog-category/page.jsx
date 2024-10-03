@@ -1,7 +1,7 @@
 import React from "react";
 import BlogCategoryPageComp from "../../dashComps/dashLandingPageComps/blog-category-comps/BlogCategoryPageComp";
 
-const DashAtAGlancePage = () => {
+const BlogCategoryPage = () => {
   return (
     <>
       <BlogCategoryPageComp />
@@ -9,4 +9,4 @@ const DashAtAGlancePage = () => {
   );
 };
 
-export default DashAtAGlancePage;
+export default BlogCategoryPage;

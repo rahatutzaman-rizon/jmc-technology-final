@@ -1,9 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import BlogCategoryTable from "./GlancesTable";
+import BlogCategoryTable from "./BlogCategoryTable";
 import BlogCategoryAddForm from "./BlogCategoryAddForm";
-import GlancesUpdateForm from "./GlancesUpdateForm";
-import ViewGlances from "./ViewGlances";
+import BlogCategoryUpdateForm from "./BlogCategoryUpdateForm";
+import ViewCategories from "./ViewCategories";
 
 const BlogCategoryPageComp = () => {
   const [open, setOpen] = useState("list");
@@ -14,8 +14,10 @@ const BlogCategoryPageComp = () => {
     <section className="flex flex-col space-y-4">
       {open === "list" && <BlogCategoryTable handleToggle={handleToggle} />}
       {open === "add" && <BlogCategoryAddForm handleToggle={handleToggle} />}
-      {open === "edit" && <GlancesUpdateForm handleToggle={handleToggle} />}
-      {open === "view" && <ViewGlances handleToggle={handleToggle} />}
+      {open === "edit" && (
+        <BlogCategoryUpdateForm handleToggle={handleToggle} />
+      )}
+      {open === "view" && <ViewCategories handleToggle={handleToggle} />}
     </section>
   );
 };

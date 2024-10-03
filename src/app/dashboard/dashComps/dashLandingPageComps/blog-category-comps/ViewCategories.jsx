@@ -1,6 +1,14 @@
+import { useBlogCategoryById } from "@/utils/customHooks/useBlogCategory";
 import React from "react";
 
-const ViewGlances = ({ handleToggle }) => {
+const ViewCategories = ({ handleToggle }) => {
+  const {
+    isLoadingBlogCategoryById,
+    error,
+    blogCategory,
+    refetchBlogCategoryById,
+  } = useBlogCategoryById(2);
+  console.log(blogCategory);
   return (
     <div className="Add">
       {/* form for add glance comps */}
@@ -8,10 +16,10 @@ const ViewGlances = ({ handleToggle }) => {
         <h1 className="text-2xl border-b mb-4 pb-4">Glance Info</h1>
         <div className="m-6">
           <p>
-            <strong>Count :</strong> 200+
+            <strong>id :</strong> {id}
           </p>
           <p>
-            <strong>Text :</strong> Happy Customers !{" "}
+            <strong>category_name :</strong> {category_name}{" "}
           </p>
         </div>
       </div>
@@ -27,4 +35,4 @@ const ViewGlances = ({ handleToggle }) => {
   );
 };
 
-export default ViewGlances;
+export default ViewCategories;

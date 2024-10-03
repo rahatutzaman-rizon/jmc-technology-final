@@ -1,6 +1,6 @@
 import React from "react";
 
-const GlancesUpdateForm = ({ handleToggle }) => {
+const BlogCategoryUpdateForm = ({ handleToggle }) => {
   return (
     <div className="Add">
       {/* header for add glance comps */}
@@ -66,4 +66,4 @@ const GlancesUpdateForm = ({ handleToggle }) => {
   );
 };
 
-export default GlancesUpdateForm;
+export default BlogCategoryUpdateForm;

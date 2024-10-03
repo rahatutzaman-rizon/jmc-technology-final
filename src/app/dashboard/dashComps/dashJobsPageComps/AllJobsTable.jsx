@@ -43,13 +43,21 @@ const AllJobsTable = () => {
   const handleDelete = async (id) => {
     const isConfirmDeleteJobApplication = confirm(`Delete job: ${id}`);
     if (isConfirmDeleteJobApplication) {
-      //   const { status } = await deleteJobs(id);
-      console.log("status", status);
-      if (status === 200) {
-        setConfirmationMsg("Row Deleted Successfully!");
-        alert("job deleted successfully");
-      } else if (status === 404) {
-        alert("job deletion failed");
+      try {
+        const token = localStorage.getItem("token");
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/jobapplied/delete/${id}`,
+          {
+            method: "DELETE",
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const data = await res.json();
+        console.log("data", data);
+      } catch (error) {
+        console.log("error", error);
       }
     }
   };
@@ -112,12 +120,12 @@ const AllJobsTable = () => {
                 <td className="py-2 px-4 border-b">{item.applingDate}</td>
                 <td className="py-3 px-4 border-b flex space-x-2">
                   <button className="text-dashSideNavText hover:underline"></button>
-                  {/* <button
+                  <button
                     onClick={() => handleDelete(item._id)}
                     className="text-dashSideNavText"
                   >
                     <FaTrash />
-                  </button> */}
+                  </button>
                   <button className="text-dashSideNavText hover:underline">
                     <Link href={`/jobDetails/${item?._id}`}>
                       <FaEye title="View Job Description" />

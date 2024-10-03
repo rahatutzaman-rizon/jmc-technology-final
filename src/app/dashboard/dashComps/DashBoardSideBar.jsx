@@ -90,8 +90,8 @@ const navItemsUp = [
     icon: <AiOutlineMenuUnfold className="mr-2" />,
     dropdown: [
       {
-        name: "Department",
-        href: "/dashboard/career/department",
+        name: "All Vacancies",
+        href: "/dashboard/all-vacancies",
       },
       {
         name: "All Applied Jobs",
