@@ -1,13 +1,14 @@
 import React from "react";
-import Footer from "../../components/Shared/Footer/footer";
+
 import Header from "../components/shared/header";
+import Footer from "../components/shared/footer";
 
 const Clientlayout = ({ children }) => {
   return (
     <>
     <Header></Header>
       {children}
-       
+     <Footer></Footer>
     </>
   );
 };
