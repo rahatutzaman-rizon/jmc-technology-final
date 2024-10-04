@@ -85,14 +85,14 @@ const EnhancedFooter = () => {
           <div className="mb-4 md:mb-0  p-2 rounded-lg  ">
             <Image src={logo} alt="JMC Technology Logo" width={180} height={100} />
           </div>
-          <div className="flex items-center space-x-4">
+          {/* <div className="flex items-center space-x-4">
             <div className="bg-white p-2 rounded-lg">
               <Image src="/caab-logo.png" alt="CAAB Logo" width={80} height={40} />
             </div>
             <div className="bg-white p-2 rounded-lg">
               <Image src="/taan-logo.png" alt="TAAN Logo" width={80} height={40} />
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="mt-6 text-center text-sm">
           <p>&copy; {new Date().getFullYear()} JMC Technology Ltd. All rights reserved.</p>
