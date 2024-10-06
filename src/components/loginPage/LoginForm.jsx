@@ -2,8 +2,6 @@
 import React, { useState } from "react";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import { useRouter } from "next/navigation";
-import axios from "axios"; // Import Axios
-import authenticateNAccessToken from "@/utils/authUtils/authenticateNAccessToken";
 
 const LoginForm = ({ setToggleSignIn }) => {
   const [formData, setFormData] = useState({
@@ -23,29 +21,32 @@ const LoginForm = ({ setToggleSignIn }) => {
     setFormData((prevState) => ({ ...prevState, error: "" }));
 
     const { email, password } = formData;
-    const data = { email, password };
 
     try {
-      const response = await axios.post(
-        "https://jmctl-api.bdcare.vip/api/login",
-        data
-      );
-      console.log(response);
-      if (response.data.status === 200) {
-        console.log("1. Sign in done", response.data);
-        authenticateNAccessToken(response.data.auth.token);
+      const response = await fetch("https://jmctl-api.bdcare.vip/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.status === 200) {
+        console.log("1. Sign in done", data);
         // Optionally, redirect or perform any other action on successful login
       } else {
         setFormData((prevState) => ({
           ...prevState,
-          error: response.data.message,
+          error: data.message,
         }));
       }
     } catch (err) {
       console.error("Login error:", err);
       setFormData((prevState) => ({
         ...prevState,
-        error: err.response?.data?.message || err.message,
+        error: "Something went wrong. Please try again.",
       }));
     }
   };
@@ -53,7 +54,7 @@ const LoginForm = ({ setToggleSignIn }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full px-12 pt-6 pb-8 mt-8 shadow-md"
+      className="w-full px-12 pt-6 pb-8 mt-8 shadow-md bg-red-200" 
     >
       {/* Email Field */}
       <div className="relative flex items-center mt-6">
@@ -89,7 +90,7 @@ const LoginForm = ({ setToggleSignIn }) => {
 
       {/* Error Message */}
       {formData.error && (
-        <p className="mt-4 text-sm text-red-500 max-w-full  break-words leading-3">
+        <p className="mt-4 text-sm text-red-500 max-w-full break-words leading-3">
           <small>{formData.error}</small>
         </p>
       )}
@@ -98,7 +99,7 @@ const LoginForm = ({ setToggleSignIn }) => {
       <div className="mt-6">
         <button
           type="submit"
-          className={`w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-contactBlue rounded-lg hover:bg-contactBlueHover focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50`}
+          className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-contactBlue rounded-lg hover:bg-contactBlueHover focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
         >
           Sign In
         </button>

@@ -8,22 +8,22 @@ export const generateStaticParams = async () => {
   // );
   // const data = await res?.json();
 
-  const { list } = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL_JMC_TECHNOLOGY}/api/blog/category/list/100`
+  const { categories } = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL_JMC_TECHNOLOGY}/api/blog/category/list`
   ).then((res) => res.json());
 
-  const params = list?.map((item) => ({
-    id: item.id.toString(),
+  const params = categories?.map((item) => ({
+    id: item._id.toString(),
   }));
   console.log(params);
   return params;
 };
 export const fetchCategoryById = async (id) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL_JMC_TECHNOLOGY}/api/blog/category/view/${id}`
+    `${process.env.NEXT_PUBLIC_BACKEND_URL_JMC_TECHNOLOGY}/api/blog/category/${id}`
   );
   const data = await res.json();
-  return data.data;
+  return data.category;
 };
 
 const EditBlogCategoryPage = async ({ params }) => {
