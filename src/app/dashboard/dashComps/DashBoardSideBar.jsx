@@ -74,11 +74,11 @@ const navItemsUp = [
   //   href: "/dashboard/faq",
   //   icon: <MdQuestionMark className="mr-2" />,
   // },
-  {
-    name: "Contacts",
-    href: "/dashboard/contacts",
-    icon: <FaRegPaperPlane className="mr-2" />,
-  },
+  // {
+  //   name: "Contacts",
+  //   href: "/dashboard/contacts",
+  //   icon: <FaRegPaperPlane className="mr-2" />,
+  // },
   // {
   //   name: "User",
   //   href: "/dashboard/user",

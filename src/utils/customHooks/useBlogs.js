@@ -54,15 +54,15 @@ export const useBlogById = (id) => {
 
 export async function deleteBlogs(id) {
   try {
-    const token = localStorage.getItem("token");
-    const apiUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/blogs/${id}`;
+    // const token = localStorage.getItem("token");
+    const apiUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL_JMC_TECHNOLOGY}/api/job/destroy/${id}`;
     console.log("delete blog by id", id, apiUrl);
     const response = await fetch(apiUrl, {
       method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${token}`,
-      },
+      // headers: {
+      //   "Content-Type": "application/json",
+      //   authorization: `Bearer ${token}`,
+      // },
     });
     console.log("deleteBlogs frontend response", response);
     return { status: response.status };

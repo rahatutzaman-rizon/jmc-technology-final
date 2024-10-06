@@ -241,6 +241,8 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import Link from "next/link";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; // Import the CSS for toast
 
 const AddJobPageComp = () => {
   const router = useRouter();
@@ -274,11 +276,16 @@ const AddJobPageComp = () => {
       );
       const data = await response.data;
       console.log(data);
+
       if (data.success) {
-        router.replace("/dashboard/all-jobs");
+        toast.success("Job created successfully!"); // Show success message
+        setTimeout(() => {
+          router.replace("/dashboard/all-jobs");
+        }, 2000); // Redirect after 2 seconds
       }
     } catch (error) {
       console.error("Error submitting job:", error);
+      toast.error("Failed to create the job. Please try again."); // Show error message
     }
   };
 
@@ -292,6 +299,7 @@ const AddJobPageComp = () => {
 
   return (
     <div className="bg-white p-4 rounded-lg">
+      <ToastContainer /> {/* Toast container to show messages */}
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 gap-4 my-8">
           <div>
@@ -451,3 +459,4 @@ const AddJobPageComp = () => {
 };
 
 export default AddJobPageComp;
+

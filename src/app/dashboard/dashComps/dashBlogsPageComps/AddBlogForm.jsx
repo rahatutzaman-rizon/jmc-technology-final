@@ -67,7 +67,7 @@ const AddBlogForm = () => {
         {
           method: "POST",
           headers: {
-            //   "Content-Type": "application/json",
+          
             authorization: `Bearer ${token}`,
           },
           body: formData,

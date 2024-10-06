@@ -189,17 +189,35 @@ const AllJobsTable = () => {
   const [confirmationMsg, setConfirmationMsg] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [deletingJobId, setDeletingJobId] = useState(null); // To track the job being deleted
 
   const handleDelete = async (id) => {
-    const isConfirmDeleteJob = confirm(`Delete job listing with ID: ${id}?`);
-    if (isConfirmDeleteJob) {
-      try {
-        await refetchVacancies(id);
-        setConfirmationMsg(`Successfully deleted job listing with ID: ${id}`);
-        // Optionally, refresh the job listings here
-      } catch (error) {
-        console.log("Error deleting job listing", error);
+    setDeletingJobId(id); // Set the current deleting job ID
+    try {
+      const response = await fetch(
+        `https://jmctl-api.bdcare.vip/api/job/destroy/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log(`Deleted job with ID: ${id}`);
+        setConfirmationMsg(`Job with ID ${id} deleted successfully.`);
+        refetchVacancies(); // Refetch the vacancies to update the list
+      } else {
+        console.error("Failed to delete job:", data.message);
+        setConfirmationMsg(`Failed to delete job: ${data.message}`);
       }
+    } catch (error) {
+      console.error("Error while deleting job:", error);
+      setConfirmationMsg(`Error while deleting job: ${error.message}`);
+    } finally {
+      setDeletingJobId(null); // Reset the deleting job ID
     }
   };
 
@@ -261,15 +279,18 @@ const AllJobsTable = () => {
                 <td className="py-3 px-4 border-b flex space-x-2">
                   <button
                     onClick={() => handleDelete(item._id)}
-                    className="text-dashSideNavText"
+                    disabled={deletingJobId === item._id} // Disable the button while the job is being deleted
+                    className={`text-dashSideNavText ${
+                      deletingJobId === item._id ? "opacity-50" : ""
+                    }`}
                   >
                     <FaTrash />
                   </button>
-                  <button className="text-dashSideNavText hover:underline">
+                  {/* <button className="text-dashSideNavText hover:underline">
                     <Link href={`/jobDetails/${item._id}`}>
                       <FaEye title="View Job Description" />
                     </Link>
-                  </button>
+                  </button> */}
                 </td>
               </tr>
             ))}
