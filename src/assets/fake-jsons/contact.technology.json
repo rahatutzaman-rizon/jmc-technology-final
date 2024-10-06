@@ -1,0 +1,21 @@
+{
+  "contacts": {
+    "showrooms": [],
+    "hotline": [
+      { "name": "JMC Technology Hotline", "phone": "+880 13212 10093" },
+      { "name": "JMC Group Hotline", "phone": "+880 13099 91999" }
+    ],
+    "email": { "department": "Administration", "address": "hello@jmc.technology" },
+    "website": "www.jmc.technology",
+    "social_media": {
+      "facebook": "www.facebook.com/JMCTechBD",
+      "instagram": "www.instagram.com/jmctechnologyltd",
+      "linkedin": "www.linkedin.com/company/jmctech",
+      "youtube": "https://www.youtube.com/@jmctechnologyltd",
+      "tiktok": "www.tiktok.com/@jmctechnologyltd",
+      "twitter": "www.x.com/jmctechnology24",
+      "threads": "www.threads.net/@jmctechnologyltd"
+    },
+    "address": "Flat# 9B, Level# 09, Main Road, Block# H, Aftabnagar, Badda, Dhaka-1212, Bangladesh"
+  }
+}

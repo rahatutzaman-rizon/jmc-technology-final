@@ -1,0 +1,68 @@
+[
+    {
+      "firstName": "Alice",
+      "lastName": "Smith",
+      "email": "alice.smith@example.com",
+      "mobileNumber": "01712345678",
+      "linkedinProfile": "https://aliceportfolio.netlify.app/",
+      "coverLetter": "I am passionate about my work.\n1. Innovative thinker\n2. Team player\n3. Detail-oriented\n......\n500",
+      "resume": "/uploads/applicant/alicesmith_cv.pdf",
+      "agreeTerms": true,
+      "jobTitle":"Job Title 1",
+            "_id":"1",
+            "applingDate": "2024-10-01"
+    },
+    {
+      "firstName": "Bob",
+      "lastName": "Johnson",
+      "email": "bob.johnson@example.com",
+      "mobileNumber": "01898765432",
+      "linkedinProfile": "https://bobportfolio.netlify.app/",
+      "coverLetter": "With a strong background in...\n1. Project management\n2. Communication skills\n......\n500",
+      "resume": "/uploads/applicant/bobjohnson_cv.pdf",
+      "agreeTerms": true,
+      "jobTitle":"Job Title 2",
+            "_id":"2",
+            "applingDate": "2024-10-01"
+    },
+    {
+      "firstName": "Carol",
+      "lastName": "Williams",
+      "email": "carol.williams@example.com",
+      "mobileNumber": "01987654321",
+      "linkedinProfile": "https://carolportfolio.netlify.app/",
+      "coverLetter": "I bring creativity and...\n1. Leadership abilities\n2. Analytical skills\n......\n500",
+      "resume": "/uploads/applicant/carolwilliams_cv.pdf",
+      "agreeTerms": true,
+      "jobTitle":"Job Title 3",
+            "_id":"3",
+            "applingDate": "2024-10-01"
+    },
+    {
+      "firstName": "David",
+      "lastName": "Brown",
+      "email": "david.brown@example.com",
+      "mobileNumber": "01765432109",
+      "linkedinProfile": "https://davidportfolio.netlify.app/",
+      "coverLetter": "I am dedicated to achieving...\n1. Time management\n2. Critical thinking\n......\n500",
+      "resume": "/uploads/applicant/davidbrown_cv.pdf",
+      "agreeTerms": true,
+      "jobTitle":"Job Title 4",
+            "_id":"4",
+            "applingDate": "2024-10-01"
+    },
+    {
+      "firstName": "Eva",
+      "lastName": "Davis",
+      "email": "eva.davis@example.com",
+      "mobileNumber": "01812345678",
+      "linkedinProfile": "https://evaportfolio.netlify.app/",
+      "coverLetter": "I have a strong commitment to...\n1. Customer service\n2. Team collaboration\n......\n500",
+      "resume": "/uploads/applicant/evadavis_cv.pdf",
+      "agreeTerms": true,
+      "jobTitle":"Job Title 5",
+            "_id":"5",
+            "applingDate": "2024-10-01"
+    }
+  ]
+  
