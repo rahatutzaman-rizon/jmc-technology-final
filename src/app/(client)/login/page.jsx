@@ -121,10 +121,131 @@
 
 
 
+// "use client";
+// import React, { useState } from "react";
+// import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
+// import { useRouter } from "next/navigation";
+// import authenticateNAccessToken from "@/utils/authUtils/authenticateNAccessToken";
+
+// const LoginForm = ({ setToggleSignIn }) => {
+//   const [formData, setFormData] = useState({
+//     email: "",
+//     password: "",
+//     error: "",
+//   });
+//   const router = useRouter();
+
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData((prevState) => ({ ...prevState, [name]: value }));
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     setFormData((prevState) => ({ ...prevState, error: "" }));
+
+//     const { email, password } = formData;
+
+//     try {
+//       const response = await fetch("https://jmctl-api.bdcare.vip/api/login", {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify({ email, password }),
+//       });
+
+//       const data = await response.json();
+
+//       if (response.status === 200) {
+//         console.log("user", data.auth.user);
+//         console.log("token", data.auth.token);
+//         // Optionally, redirect or perform any other action on successful login
+//         authenticateNAccessToken(data.auth)
+//       } else {
+//         setFormData((prevState) => ({
+//           ...prevState,
+//           error: data.message,
+//         }));
+//       }
+//     } catch (err) {
+//       console.error("Login error:", err);
+//       setFormData((prevState) => ({
+//         ...prevState,
+//         error: "Something went wrong. Please try again.",
+//       }));
+//     }
+//   };
+
+//   return (
+//     <section className=" flex justify-center items-center">
+
+// <form
+//       onSubmit={handleSubmit}
+//       className="w-full max-w-5xl  md:m-12 mt-16 p-8 shadow-md bg-white" 
+//     >
+//       {/* Email Field */}
+//       <div className="relative flex items-center mt-6">
+//         <span className="absolute">
+//           <AiOutlineMail className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" />
+//         </span>
+//         <input
+//           type="email"
+//           name="email"
+//           value={formData.email}
+//           onChange={handleChange}
+//           className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+//           placeholder="Email address"
+//           required
+//         />
+//       </div>
+
+//       {/* Password Field */}
+//       <div className="relative flex items-center mt-4">
+//         <span className="absolute">
+//           <AiOutlineLock className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" />
+//         </span>
+//         <input
+//           type="password"
+//           name="password"
+//           value={formData.password}
+//           onChange={handleChange}
+//           className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+//           placeholder="Password"
+//           required
+//         />
+//       </div>
+
+//       {/* Error Message */}
+//       {formData.error && (
+//         <p className="mt-4 text-sm text-red-500 max-w-full break-words leading-3">
+//           <small>{formData.error}</small>
+//         </p>
+//       )}
+
+//       {/* Submit Button */}
+//       <div className="mt-6">
+//         <button
+//           type="submit"
+//           className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-contactBlue rounded-lg hover:bg-contactBlueHover focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+//         >
+//           Sign In
+//         </button>
+//       </div>
+//     </form>
+//     </section>
+//   );
+// };
+
+// export default LoginForm;
+
+
+
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import { useRouter } from "next/navigation";
+import { authenticateNAccessToken } from "@/utils/authUtils/authenticateNAccessToken";
 
 const LoginForm = ({ setToggleSignIn }) => {
   const [formData, setFormData] = useState({
@@ -133,6 +254,16 @@ const LoginForm = ({ setToggleSignIn }) => {
     error: "",
   });
   const router = useRouter();
+  const [redirectPath, setRedirectPath] = useState("/dashboard"); // Default redirect path
+
+  useEffect(() => {
+    // Get the redirect path from the URL query parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirect = urlParams.get("redirect");
+    if (redirect) {
+      setRedirectPath(redirect);
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -157,8 +288,11 @@ const LoginForm = ({ setToggleSignIn }) => {
       const data = await response.json();
 
       if (response.status === 200) {
-        console.log("1. Sign in done", data);
-        // Optionally, redirect or perform any other action on successful login
+        // Authenticate and set token in cookies
+        await authenticateNAccessToken(data.auth);
+        
+        // Redirect to the desired route
+        router.push(redirectPath);
       } else {
         setFormData((prevState) => ({
           ...prevState,
@@ -175,59 +309,61 @@ const LoginForm = ({ setToggleSignIn }) => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="w-full px-12 pt-6 pb-8 mt-8 shadow-md bg-red-200" 
-    >
-      {/* Email Field */}
-      <div className="relative flex items-center mt-6">
-        <span className="absolute">
-          <AiOutlineMail className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" />
-        </span>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-          placeholder="Email address"
-          required
-        />
-      </div>
+    <section className="flex justify-center items-center">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full max-w-5xl md:m-12 mt-16 p-8 shadow-md bg-white"
+      >
+        {/* Email Field */}
+        <div className="relative flex items-center mt-6">
+          <span className="absolute">
+            <AiOutlineMail className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" />
+          </span>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+            placeholder="Email address"
+            required
+          />
+        </div>
 
-      {/* Password Field */}
-      <div className="relative flex items-center mt-4">
-        <span className="absolute">
-          <AiOutlineLock className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" />
-        </span>
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-          placeholder="Password"
-          required
-        />
-      </div>
+        {/* Password Field */}
+        <div className="relative flex items-center mt-4">
+          <span className="absolute">
+            <AiOutlineLock className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" />
+          </span>
+          <input
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+            placeholder="Password"
+            required
+          />
+        </div>
 
-      {/* Error Message */}
-      {formData.error && (
-        <p className="mt-4 text-sm text-red-500 max-w-full break-words leading-3">
-          <small>{formData.error}</small>
-        </p>
-      )}
+        {/* Error Message */}
+        {formData.error && (
+          <p className="mt-4 text-sm text-red-500 max-w-full break-words leading-3">
+            <small>{formData.error}</small>
+          </p>
+        )}
 
-      {/* Submit Button */}
-      <div className="mt-6">
-        <button
-          type="submit"
-          className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-contactBlue rounded-lg hover:bg-contactBlueHover focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
-        >
-          Sign In
-        </button>
-      </div>
-    </form>
+        {/* Submit Button */}
+        <div className="mt-6">
+          <button
+            type="submit"
+            className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-contactBlue rounded-lg hover:bg-contactBlueHover focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+          >
+            Sign In
+          </button>
+        </div>
+      </form>
+    </section>
   );
 };
 
