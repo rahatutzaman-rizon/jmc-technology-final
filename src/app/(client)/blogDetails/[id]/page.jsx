@@ -1,10 +1,4 @@
-// import React from "react";
-// import CommnetBlogForm from "@/components/blogsPage/CommnetBlogForm";
-// import RecentBlogsComponent from "@/components/blogsPage/RecentBlogsComponent";
-// import TagsBlogSection from "@/components/blogsPage/TagsBlogSection";
-// import LocationsCard from "@/components/shared/LocationsCard";
-// import Image from "next/image";
-// import Link from "next/link";
+
 import CommnetBlogForm from "@/components/blogsPage/CommnetBlogForm";
 import RecentBlogsComponent from "@/components/blogsPage/RecentBlogsComponent";
 import TagsBlogSection from "@/components/blogsPage/TagsBlogSection";
@@ -25,10 +19,9 @@ export async function generateStaticParams() {
   const { blogs } = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL_JMC_TECHNOLOGY}/api/blogs`
   ).then((res) => res.json());
-
-  const staticParams4BlogDetails = blogs.map((blog) => ({
+const staticParams4BlogDetails = blogs.map((blog) => ({
     id: blog._id.toString(),
-  }));
+  }));  
 
   console.log("staticParams4BlogDetails", staticParams4BlogDetails);
   return staticParams4BlogDetails;
@@ -142,7 +135,7 @@ const SgBlogDetails = async ({ params }) => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
               <div className="flex gap-2 flex-wrap">
                 <h1 className="text-xl font-bold">Tags : </h1>
-                {
+                {/* {
                   // ["inani beach", "inani beach hotel", "inani beach resort"]
                   blog?.tags?.split(",").map((tag, index) => (
                     <span
@@ -152,7 +145,12 @@ const SgBlogDetails = async ({ params }) => {
                       {tag}
                     </span>
                   ))
-                }
+                } */}
+                <span
+                      className="inline-block bg-[#E8604C] text-white uppercase font-bold text-sm p-1 px-2 rounded-xl"
+                    >
+                      {blog?.tags}
+                    </span>
               </div>
               <div className="flex gap-2 lg:justify-end">
                 <Link
