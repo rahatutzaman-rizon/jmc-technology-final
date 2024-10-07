@@ -3,17 +3,17 @@ import EditBlogForm from "@/app/dashboard/dashComps/dashBlogsPageComps/EditBlogF
 
 export async function generateStaticParams() {
   const { blogs } = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/blogs`
+    `${process.env.NEXT_PUBLIC_BACKEND_URL_JMC_TECHNOLOGY}/api/blogs`
   ).then((res) => res.json());
   const staticParams4updateBlog = blogs.map((blog) => ({
-    id: blog._id,
+    id: blog._id.toString(),
   }));
   console.log("staticParams4updateBlog", staticParams4updateBlog);
   return staticParams4updateBlog;
 }
 
 export async function fetchBlogById(id) {
-  const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/blogs/${id}`;
+  const url = `${process.env.NEXT_PUBLIC_BACKEND_URL_JMC_TECHNOLOGY}/api/blog/${id}`;
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -32,7 +32,8 @@ const EditBlog = async ({ params: { id } }) => {
 
   return (
     <section>
-      <EditBlogForm blog={blog} />
+      {/* <EditBlogForm blog={blog} /> */}
+      <EditBlogForm blogId={blog._id} />
     </section>
   );
 };

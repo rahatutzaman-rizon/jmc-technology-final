@@ -1,5 +1,5 @@
-const authenticateNAccessToken = async (token) => {
-  localStorage.setItem("token", token);
-};
+// const authenticateNAccessToken = async (token) => {
+//   localStorage.setItem("token", token);
+// };
 
-export default authenticateNAccessToken;
+// export default authenticateNAccessToken;

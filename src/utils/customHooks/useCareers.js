@@ -49,5 +49,7 @@ export const useCareers = () => {
     queryClient.invalidateQueries(["careers"]);
   };
 
+  console.log("data",data)
+
   return { isLoading, error, careers: data, refetchCareers };
 };

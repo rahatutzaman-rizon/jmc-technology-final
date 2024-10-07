@@ -7,8 +7,8 @@ export const useBlogs = (blogCategory) => {
     queryKey: ["blogs", blogCategory], // Include category in the query key
     queryFn: async () => {
       const url = blogCategory
-        ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/blogs/categories/${blogCategory}`
-        : `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/blogs`;
+        ? `${process.env.NEXT_PUBLIC_BACKEND_URL_JMC_TECHNOLOGY}/api/blogs/${blogCategory}`
+        : `${process.env.NEXT_PUBLIC_BACKEND_URL_JMC_TECHNOLOGY}/api/blogs`;
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -25,7 +25,6 @@ export const useBlogs = (blogCategory) => {
   };
 
   const { blogs, success } = data || {};
-
   return { isLoading, error, blogs, success, refetchBlogs };
 };
 
@@ -34,7 +33,7 @@ export const useBlogById = (id) => {
   const { isLoading, error, data, refetch } = useQuery({
     queryKey: ["blogById", id],
     queryFn: () =>
-      fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/blogs/${id}`).then(
+      fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL_JMC_TECHNOLOGY}/api/blog/${id}`).then(
         (res) => res.json()
       ),
   });
@@ -47,21 +46,19 @@ export const useBlogById = (id) => {
   return {
     isLoadingBlogById: isLoading,
     error,
-    blog: data?.blog,
+    blog: data,
     refetchBlogById,
   };
 };
 
 export async function deleteBlogs(id) {
   try {
-    // const token = localStorage.getItem("token");
-    const apiUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL_JMC_TECHNOLOGY}/api/job/destroy/${id}`;
+    const apiUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL_JMC_TECHNOLOGY}/api/blog/destroy/${id}`;
     console.log("delete blog by id", id, apiUrl);
     const response = await fetch(apiUrl, {
       method: "DELETE",
       // headers: {
       //   "Content-Type": "application/json",
-      //   authorization: `Bearer ${token}`,
       // },
     });
     console.log("deleteBlogs frontend response", response);

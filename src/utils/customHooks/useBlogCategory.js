@@ -40,7 +40,7 @@ export const useBlogCategories = () => {
   const { isLoading, error, data } = useQuery({
     queryKey: ["blogCategory"], // Include category in the query key
     queryFn: async () => {
-      const url = `${process.env.NEXT_PUBLIC_BACKEND_URL_JMC_TECHNOLOGY}/api/blog/category/list/100`; // এখানে api wrong
+      const url = `${process.env.NEXT_PUBLIC_BACKEND_URL_JMC_TECHNOLOGY}/api/blog/category/list`; // এখানে api wrong
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -55,12 +55,12 @@ export const useBlogCategories = () => {
     queryClient.invalidateQueries(["blogCategory"]);
   };
 
-  const { category, success } = data || {};
+  const { categories, success } = data || {};
 
   return {
     isLoading,
     error,
-    blogCategories: category,
+    blogCategories: categories,
     refetchBlogCategory: refetchBlogCategories,
   };
 };
@@ -72,7 +72,7 @@ export const useBlogCategoryById = (id) => {
     queryKey: ["blogCategoryById", id],
     queryFn: () =>
       fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL_JMC_TECHNOLOGY}/api/blog/category/view/${id}`
+        `${process.env.NEXT_PUBLIC_BACKEND_URL_JMC_TECHNOLOGY}/api/blog/category/${id}`
       ).then((res) => res.json()),
   });
 
@@ -80,15 +80,15 @@ export const useBlogCategoryById = (id) => {
     queryClient.invalidateQueries(["blogCategoryById", id]);
   };
 
-  const { data: blogCategoryData, status } = data || {};
+  const { category, success } = data || {};
   console.log(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL_JMC_TECHNOLOGY}/api/blog/category/view/${id}`
+    `${process.env.NEXT_PUBLIC_BACKEND_URL_JMC_TECHNOLOGY}/api/blog/category/${id}`
   );
 
   return {
     isLoadingBlogCategoryById: isLoading,
     error,
-    blogCategory: blogCategoryData,
+    blogCategory: category,
     refetchBlogCategoryById,
   };
 };

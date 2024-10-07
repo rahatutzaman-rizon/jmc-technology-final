@@ -269,7 +269,7 @@ const AllJobsTable = () => {
           </thead>
           <tbody>
             {currentItems?.map((item, i) => (
-              <tr key={i}>
+              <tr key={i} className="text-center">
                 <td className="py-2 px-4 border-b">{item.title}</td>
                 <td className="py-2 px-4 border-b">{item.vacancy_count}</td>
                 <td className="py-2 px-4 border-b">N/A</td>

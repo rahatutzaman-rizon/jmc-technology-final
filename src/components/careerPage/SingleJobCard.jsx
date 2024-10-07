@@ -11,8 +11,8 @@ const SingleJobCard = ({ career }) => {
         <div className="relative w-full h-48  group overflow-hidden">
           <Image
             src={
-              `${career?.job_thumbnail}` ||
-              "https://img.freepik.com/free-photo/hiring-concept-with-empty-chair_23-2149519862.jpg"
+              `${career?.job_thumbnail.includes('.') ? `${process.env.NEXT_PUBLIC_BACKEND_URL_JMC_TECHNOLOGY}/${career?.job_thumbnail}` : "https://img.freepik.com/free-photo/hiring-concept-with-empty-chair_23-2149519862.jpg"}`
+              
             }
             alt={career?.title || "Job Image"}
             layout="fill"

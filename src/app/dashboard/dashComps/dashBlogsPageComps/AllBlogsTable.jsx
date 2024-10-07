@@ -62,16 +62,18 @@ const AllBlogsTable = () => {
         <table className="min-w-full bg-white border border-gray-300 mb-4">
           <thead>
             <tr>
-              <th className="py-2 px-4 border-b">Title</th>
+            <th className="py-2 px-4 border-b">Id</th>
+            <th className="py-2 px-4 border-b">Title</th>
               <th className="py-2 px-4 border-b">Description</th>
-              <th className="py-2 px-4 border-b">Category</th>
+              <th className="py-2 px-4 border-b">Category Id</th>
               <th className="py-2 px-4 border-b">Actions</th>
             </tr>
           </thead>
           <tbody>
             {currentItems?.map((item, i) => (
-              <tr key={i}>
-                <td className="py-2 px-4 border-b">{item?.title}</td>
+              <tr key={i} className="text-center">
+              <td className="py-2 px-4 border-b">{item?._id}</td>
+              <td className="py-2 px-4 border-b">{item?.title}</td>
                 <td className="py-2 px-4 border-b">
                   {item?.seoDescriptions?.slice(0, 15) || "Description"}...
                 </td>
@@ -92,7 +94,7 @@ const AllBlogsTable = () => {
                   >
                     <FaTrash />
                   </button>
-                  <button className="text-dashSideNavText hover:underline">
+                  <button className="text-dashSideNavText hover:underline cursor-pointer">
                     <Link href={`/blogDetails/${item?._id}`}>
                       <FaEye />
                     </Link>

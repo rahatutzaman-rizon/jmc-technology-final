@@ -90,7 +90,7 @@ const EditBlogCategoryPageComp = ({ blogCategory }) => {
     const { category_name } = e.target.elements;
 
     try {
-      const { data } = await axios.post(
+      const { data } = await axios.put(
         `${process.env.NEXT_PUBLIC_BACKEND_URL_JMC_TECHNOLOGY}/api/blog/category/edit/${blogCategory.id}`,
         {
           category_name: category_name.value,
@@ -98,7 +98,7 @@ const EditBlogCategoryPageComp = ({ blogCategory }) => {
       );
       console.log(data);
 
-      if (data.success) {
+      if (data.status == 200) {
         await refetchBlogCategory();
         router.push("/dashboard/blog-category");
       }

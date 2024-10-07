@@ -30,7 +30,7 @@ const SingleBlogCard = ({ blog, index }) => {
       >
         <Image
           src={
-            `${process.env.NEXT_PUBLIC_BACKEND_URL}/${imagePath}` ||
+            `${process.env.NEXT_PUBLIC_BACKEND_URL_JMC_TECHNOLOGY}/${imagePath}` ||
             "https://theworldtravelguy.com/wp-content/uploads/2020/04/DSCF3947_450n.jpg"
           }
           alt={title || "Blog Image"}
@@ -51,7 +51,7 @@ const SingleBlogCard = ({ blog, index }) => {
         {/* Writer and Comments */}
         <div className="flex items-center text-sm text-gray-600 mb-4">
           <span className="mr-2">
-            {seoDescriptions.slice(0, 100) || "descriptions"} ...
+            {seoDescriptions?.slice(0, 100) || "descriptions"} ...
           </span>
         </div>
       </div>

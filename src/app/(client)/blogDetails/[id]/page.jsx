@@ -23,11 +23,11 @@ import {
 // Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {
   const { blogs } = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/blogs`
+    `${process.env.NEXT_PUBLIC_BACKEND_URL_JMC_TECHNOLOGY}/api/blogs`
   ).then((res) => res.json());
 
   const staticParams4BlogDetails = blogs.map((blog) => ({
-    id: blog._id,
+    id: blog._id.toString(),
   }));
 
   console.log("staticParams4BlogDetails", staticParams4BlogDetails);
@@ -37,14 +37,15 @@ export async function generateStaticParams() {
 // i want to create fn for generate metadata
 export async function generateMetadata({ params }) {
   const blog = await fetchBlogById(params.id); // fetching the blog by ID
+  console.log(blog)
   return {
     title: blog?.title, // using the fetched blog data
-    description: blog?.seoDescriptions || blog?.descriptions.slice(0, 30),
-    keywords: blog?.tags?.join(", "),
+    description: blog?.seoDescriptions || blog?.descriptions?.slice(0, 30),
+    keywords: blog?.tags,
     openGraph: {
       images: [
         {
-          url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/${blog?.imagePath}`,
+          url: `${process.env.NEXT_PUBLIC_BACKEND_URL_JMC_TECHNOLOGY}/${blog?.imagePath}`,
         },
       ],
     },
@@ -52,7 +53,7 @@ export async function generateMetadata({ params }) {
 }
 
 async function fetchBlogById(id) {
-  const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/blogs/${id}`;
+  const url = `${process.env.NEXT_PUBLIC_BACKEND_URL_JMC_TECHNOLOGY}/api/blog/${id}`;
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -109,7 +110,7 @@ const SgBlogDetails = async ({ params }) => {
             <div className="flex items-center text-sm text-gray-600 gap-4 mb-4">
               <div className="text-base flex items-center">
                 <FaRegUser className="inline-block mr-1 text-red-400" />
-                <span>{blog?.writer}</span>
+                <span>{blog?.writer || "Anonymous"}</span>
               </div>
               <div className="text-base flex items-center">
                 <FaRegFolderOpen className="inline-block mr-1 text-red-400" />
@@ -122,7 +123,17 @@ const SgBlogDetails = async ({ params }) => {
                 {blog?.title || "Blogs Title Here"}
               </h1>
               <section className="text-gray-500 text-justify my-6">
-                <div dangerouslySetInnerHTML={{ __html: blog?.descriptions }} />
+                {/* <div dangerouslySetInnerHTML={{ __html: blog?.descriptions }} /> */}
+                {blog?.descriptions ? (
+  blog.descriptions.includes('<') ? (
+    <div dangerouslySetInnerHTML={{ __html: blog.descriptions }} />
+  ) : (
+    <p>{blog.descriptions}</p>
+  )
+) : (
+  <p>No description available</p>
+)}
+
               </section>
             </div>
 
@@ -133,7 +144,7 @@ const SgBlogDetails = async ({ params }) => {
                 <h1 className="text-xl font-bold">Tags : </h1>
                 {
                   // ["inani beach", "inani beach hotel", "inani beach resort"]
-                  blog?.tags.map((tag, index) => (
+                  blog?.tags?.split(",").map((tag, index) => (
                     <span
                       key={index}
                       className="inline-block bg-[#E8604C] text-white uppercase font-bold text-sm p-1 px-2 rounded-xl"

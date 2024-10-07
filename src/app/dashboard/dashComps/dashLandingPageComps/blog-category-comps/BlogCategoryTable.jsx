@@ -142,12 +142,12 @@ const BlogCategoryTable = ({ handleToggle }) => {
     useBlogCategories();
 
   const handleDelete = async (id) => {
-    if (confirm("Are you sure you want to delete this category?")) {
+    if (confirm("Are you sure you want to delete this category?",id)) {
       try {
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_BACKEND_URL_JMC_TECHNOLOGY}/api/blog/category/destroy/${id}`,
           {
-            method: "GET",
+            method: "DELETE",
           }
         );
 
@@ -209,7 +209,7 @@ const BlogCategoryTable = ({ handleToggle }) => {
           <tbody>
             {currentItems?.map((item) => (
               <tr key={item.id} className="text-center">
-                <td className="py-2 px-4 border-b">{item.id}</td>
+                <td className="py-2 px-4 border-b">{item._id}</td>
                 <td className="py-2 px-4 border-b">{item.category_name}</td>
                 <td className="py-3 px-4 border-b flex space-x-2 items-center justify-center">
                   <button
@@ -217,13 +217,13 @@ const BlogCategoryTable = ({ handleToggle }) => {
                     className="text-dashSideNavText hover:underline"
                   >
                     <Link
-                      href={`/dashboard/blog-category/edit-blog-category/${item.id}`}
+                      href={`/dashboard/blog-category/edit-blog-category/${item._id}`}
                     >
                       <FaEdit />
                     </Link>
                   </button>
                   <button
-                    onClick={() => handleDelete(item.id)}
+                    onClick={() => handleDelete(item._id)}
                     className="text-dashSideNavText"
                   >
                     <FaTrash />

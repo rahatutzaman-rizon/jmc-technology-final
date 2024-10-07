@@ -20,7 +20,7 @@ export const useVacancies = () => {
   const refetchVacancies = () => {
     queryClient.invalidateQueries(["vacancies"]);
   };
-
+console.log(data)
   const { jobs, success } = data || {};
 
   return { isLoading, error, jobs, success, refetchVacancies };

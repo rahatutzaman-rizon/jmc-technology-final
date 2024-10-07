@@ -268,6 +268,7 @@ const JobApplyForm = ({ job }) => {
     mobile: "",
     address: "",
     resume: null,
+    status:"applied"
   });
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -301,6 +302,7 @@ const JobApplyForm = ({ job }) => {
     formDataToSend.append("mobile", formData.mobile);
     formDataToSend.append("address", formData.address);
     formDataToSend.append("resume", formData.resume);
+    formDataToSend.append("status", formData.status);
 
     try {
       const response = await axios.post(
@@ -329,7 +331,7 @@ const JobApplyForm = ({ job }) => {
     >
       <h2 className="text-2xl font-bold mb-6">Application For *</h2>
       <p className="text-gray-600 mb-4">
-        {job?.job_title || "Junior Education Consultant"}
+        {job?.title || "Junior Education Consultant"}
       </p>
 
       {/* First Name and Last Name */}

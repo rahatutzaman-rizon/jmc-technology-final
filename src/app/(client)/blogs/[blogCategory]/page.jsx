@@ -2,7 +2,7 @@ import AllBlogsPageComps from "@/components/blogsPage/AllBlogsPageComps";
 
 export async function generateStaticParams() {
   const { categories } = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/blogs/categories/unique`
+    `${process.env.NEXT_PUBLIC_BACKEND_URL_JMC_TECHNOLOGY}/api/v1/blogs/categories/unique`
   ).then((res) => res.json());
 
   const staticParams4CategorisedBlogs = categories.map((category) => ({
