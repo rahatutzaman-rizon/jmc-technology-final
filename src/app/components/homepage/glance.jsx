@@ -8,7 +8,7 @@ import CountUp from "react-countup";
 const AtAGlance = () => {
   const data = [
     { value: 6, label: "Complete Projects", icon: FaProjectDiagram },
-    { value: 7, label: "Client Reviews", icon: FaStar },
+    { value: 7, label: "Client Reviews", icon: FaStar },  // Value remains 7, but will be displayed as '07'
     { value: 5, label: "Winning Awards", icon: FaTrophy },
     { value: 5, label: "Free Resources", icon: FaBook },
   ];
@@ -20,11 +20,11 @@ const AtAGlance = () => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true); // Set the state to true when the section is in view
-          observer.disconnect(); // Stop observing once it becomes visible
+          setIsVisible(true);
+          observer.disconnect();
         }
       },
-      { threshold: 0.2 } // Adjust the threshold as needed (0.2 means 20% of the element must be visible)
+      { threshold: 0.2 }
     );
 
     if (sectionRef.current) {
@@ -40,22 +40,22 @@ const AtAGlance = () => {
 
   return (
     <div
-      className="relative bg-white pb-24 pt-40 px-8 bg-gradient-to-b from-indigo-50 to-white lg:px-20 overflow-hidden"
+      className="relative bg-white py-40 px-8 lg:px-20 overflow-hidden"
       ref={sectionRef}
     >
-      <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2   lg:grid-cols-4 gap-8 max-w-7xl mx-auto items-center">
+      <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto items-center">
         {data.map((item, index) => (
           <motion.div
             key={index}
-            className="flex items-start space-x-4 px-8 py-12 bg-white border border-indigo-50 rounded-xl"
+            className="flex items-start space-x-4 px-8 py-12 bg-indigo-50 border border-indigo-100 rounded-lg"
             initial={{ opacity: 0, y: 20 }}
-            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }} // Animate based on scroll visibility
+            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
             <motion.div
-              className="text-primary-600 p-3 bg-indigo-50/50 rounded-full"
+              className="text-primary-600 p-4 bg-white rounded-full"
               initial={{ scale: 0 }}
-              animate={isVisible ? { scale: 1 } : { scale: 0 }} // Scale based on scroll visibility
+              animate={isVisible ? { scale: 1 } : { scale: 0 }}
               transition={{
                 type: "spring",
                 stiffness: 260,
@@ -63,13 +63,13 @@ const AtAGlance = () => {
                 delay: 0.3 + index * 0.1,
               }}
             >
-              <item.icon size={20} className="text-cyan-600/50" />
+              <item.icon size={20} className="text-cyan-600" />
             </motion.div>
             <div className="text-left">
               <motion.div
-                className="text-4xl font-bold text-indigo-900 bg-clip-text"
+                className="text-5xl font-bold text-indigo-900 bg-clip-text"
                 initial={{ scale: 0 }}
-                animate={isVisible ? { scale: 1 } : { scale: 0 }} // Scale based on scroll visibility
+                animate={isVisible ? { scale: 1 } : { scale: 0 }}
                 transition={{
                   type: "spring",
                   stiffness: 260,
@@ -81,10 +81,11 @@ const AtAGlance = () => {
                   start={0}
                   end={item.value}
                   duration={2.5}
-                  delay={isVisible ? 0.5 + index * 0.2 : 0} // Start counting when visible
+                  delay={isVisible ? 0.5 + index * 0.2 : 0}
+                  formattingFn={(val) => String(val).padStart(2, '0')} // Adds leading zero for 7
                 />+
               </motion.div>
-              <div className="text-sm md:text-base text-gray-800 mt-1">
+              <div className="text-base md:text-base text-indigo-900 mt-3">
                 {item.label}
               </div>
             </div>

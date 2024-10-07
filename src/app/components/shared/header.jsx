@@ -20,7 +20,7 @@ const products = [
 const NavLink = ({ href, children }) => (
   <Link
     href={href}
-    className="text-teal-800 font-medium hover:text-teal-700 transition-colors"
+    className="text-teal-900 font-medium hover:text-teal-700 transition-colors"
   >
     {children}
   </Link>
@@ -34,7 +34,7 @@ const DropdownMenu = ({ title, items }) => {
   return (
     <div className="relative group">
       <button 
-        className="flex items-center text-teal-800 font-medium hover:text-teal-700 transition-colors"
+        className="flex items-center text-teal-900 font-medium hover:text-teal-700 transition-colors"
         onMouseEnter={() => setIsOpen(true)}
         onMouseLeave={() => setIsOpen(false)}
       >
@@ -49,7 +49,7 @@ const DropdownMenu = ({ title, items }) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
             transition={{ duration: 0.3 }}
-            className="absolute left-0 mt-4 w-[28rem] backdrop-blur-2xl bg-opacity-95 rounded-lg text-sm font-medium shadow-lg py-4 px-6 grid grid-cols-2 gap-4 z-50"
+            className="absolute left-0 mt-4 w-[28rem] backdrop-blur-3xl bg-white/20 rounded-lg text-sm font-medium shadow-lg py   -6 px-6 grid grid-cols-2 gap-4 z-50"
             onMouseEnter={() => setIsOpen(true)}
             onMouseLeave={() => setIsOpen(false)}
           >
@@ -111,7 +111,7 @@ export default function Header() {
   const [mobileProductOpen, setMobileProductOpen] = useState(false)
 
   return (
-    <header className="shadow fixed backdrop-blur-2xl bg-opacity-90 w-full top-0 z-50">
+    <header className="shadow fixed backdrop-blur-3xl bg-white/20 w-full top-0 z-50">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex-shrink-0">

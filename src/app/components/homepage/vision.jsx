@@ -31,7 +31,7 @@ const MissionVision = () => {
   }, []);
 
   return (
-    <div className="relative max-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50  overflow-hidden">
+    <div className="relative max-h-screen bg-gradient-to-br from-indigo-50 via-white to-white  overflow-hidden">
       {/* Bottom right design element */}
       <motion.div
         className="absolute bottom-0 right-0 w-128 h-128"
@@ -68,7 +68,7 @@ const MissionVision = () => {
               transition={{ duration: 0.8, delay: 0.6 }}
             />
             <h2 className="text-xl font-semibold mt-8 text-purple-900">Our Mission</h2>
-            <p className="text-base font-medium leading-6 text-purple-950 my-6">
+            <p className="text-base leading-6 text-slate-700 my-6">
               To revolutionize software development with a focus on sustainability, minimizing environmental impact, and promoting responsible resource utilization.
             </p>
             <div className="flex items-center space-x-4 mb-4">
@@ -96,7 +96,7 @@ const MissionVision = () => {
               transition={{ duration: 0.8, delay: 0.8 }}
             />
             <h2 className="text-xl text-end font-bold mt-8 text-indigo-900">Our Vision</h2>
-            <p className="text-base text-end text-indigo-950 my-8">
+            <p className="text-base text-end leading-6 text-slate-700 my-8">
               To be the global leader in software innovation, transforming industries and enhancing lives through sustainable and impactful technological advancements.
             </p>
             <div className="flex items-center justify-end space-x-4">

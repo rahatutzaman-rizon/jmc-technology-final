@@ -216,6 +216,7 @@ export default function Services() {
                   <div className="text-indigo-500 my-4">{service.icon}</div>
                   <h2 className="text-xl font-bold text-teal-950 mb-4">{service.name}</h2>
                   <p className="text-gray-600 text-sm text-center mb-12 max-w-2xl">{service.description}</p>
+                  
                   <div className="grid grid-cols-2 sm:grid-cols-3 mb-8 md:grid-cols-6 gap-6">
                     {service.techIcons.map((tech, techIdx) => (
                       <motion.div 

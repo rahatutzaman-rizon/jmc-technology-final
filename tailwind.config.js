@@ -9,6 +9,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Open Sans', 'sans-serif'],  // Body font
+        // heading: ['Poppins', 'Arial', 'sans-serif'], // Heading font
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",

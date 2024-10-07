@@ -69,13 +69,13 @@ export default function Banner() {
 
         <div className="flex flex-col lg:flex-row items-center justify-between lg:space-x-12 text-center lg:text-left">
           <motion.div
-            className="lg:w-1/2 mb-12 lg:mb-0"
+            className="lg:w-2/3 mb-12 lg:mb-0"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <h1 className="text-5xl font-bold text-teal-950 mb-10 relative z-10 leading-tight">
-              Crafting software solutions that empower your business to thrive
+            <h1 className="text-6xl font-bold mb-10 relative z-10 leading-tight text-transparent bg-clip-text bg-gradient-to-r from-teal-700 via-teal-500 to-indigo-500">
+              Crafting Software Solutions That Empower Your Business To Thrive
             </h1>
 
             {features.map((feature, index) => (
@@ -108,7 +108,7 @@ export default function Banner() {
               whileHover={{ scale: 1.01 }}
               whileTap={{ scale: 1.04 }}
             >
-              <motion.span className="bg-gradient-to-r from-emerald-500 to-indigo-500 text-white px-8 sm:px-10 py-2 sm:py-3 rounded-full shadow-lg inline-block text-lg sm:text-lg font-semibold cursor-pointer">
+              <motion.span className="bg-gradient-to-r from-emerald-100 to-indigo-100 text-emerald-950 px-8 sm:px-10 py-2 sm:py-3 rounded-full shadow-lg inline-block text-lg sm:text-lg font-semibold cursor-pointer">
                 Pioneering Excellence for 2+ Years
               </motion.span>
               {/* <motion.div
