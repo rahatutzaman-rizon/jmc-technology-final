@@ -17,7 +17,7 @@ export async function generateStaticParams() {
 
 export async function fetchJobById(id) {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL_JMC_TECHNOLOGY}/api/job/${id}`
+   `${process.env.NEXT_PUBLIC_BACKEND_URL_JMC_TECHNOLOGY}/api/job/${id}`
   );
   const data = await res.json();
   return data.data;

@@ -181,68 +181,75 @@ import { useEffect, useState } from "react";
 import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
 
 const AllJobsTable = () => {
-  const [{ isLoading, error, applications }, setAppliedJobs] = useState({
+  const [appliedJobsState, setAppliedJobsState] = useState({
     isLoading: true,
     error: null,
-    applications: null,
+    appliedJobs: [],
   });
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [confirmationMsg, setConfirmationMsg] = useState("");
+
+  const fetchAppliedJobsData = async () => {
+    try {
+      setAppliedJobsState((prevState) => ({
+        ...prevState,
+        isLoading: true,
+      }));
+      const response = await fetch(
+        "https://jmctl-api.bdcare.vip/api/job/application/list"
+      );
+      const data = await response.json();
+      setAppliedJobsState({
+        isLoading: false,
+        error: null,
+        appliedJobs: data.applications,
+      });
+    } catch (error) {
+      setAppliedJobsState((prevState) => ({
+        ...prevState,
+        isLoading: false,
+        error: error.message || "Something went wrong",
+      }));
+    }
+  };
+
   useEffect(() => {
-    const fetchAppliedJobsData = async () => {
-      try {
-        setAppliedJobs((prevState) => ({
-          ...prevState,
-          isLoading: true,
-        }));
-
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL_JMC_TECHNOLOGY}/api/job/application/list`
-        );
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch data");
-        }
-
-        const data = await response.json();
-
-        // Update state with fetched applications
-        setAppliedJobs({
-          isLoading: false,
-          error: null,
-          applications: data.applications,
-        });
-      } catch (error) {
-        setAppliedJobs((prevState) => ({
-          ...prevState,
-          isLoading: false,
-          error: error.message,
-        }));
-      }
-    };
-
     fetchAppliedJobsData();
   }, []);
 
-  const [confirmationMsg, setConfirmationMsg] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
-
-  const handleDelete = async (_id) => {
-    const isConfirmDeleteJobApplication = confirm(`Delete job: ${_id}`);
+  const handleDelete = async (id) => {
+    const isConfirmDeleteJobApplication = confirm(
+      `Are you sure you want to delete job ID: ${id}?`
+    );
     if (isConfirmDeleteJobApplication) {
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL_JMC_TECHNOLOGY}/api/job/application/destroy/${_id}`,
+          `https://jmctl-api.bdcare.vip/api/job/application/destroy/${id}`,
           {
             method: "DELETE",
             // headers: {
-            //   authorization: `Bearer ${token}`,
+            //   "Content-Type": "application/json",
+            //   authorization: `Bearer ${token}`, // Make sure to replace with actual token if needed
             // },
           }
         );
-        const data = await res.json();
-        console.log("data", data);
+
+        if (!res.ok) {
+          throw new Error("Failed to delete the job application");
+        }
+
+        // Remove deleted job from the state
+        setAppliedJobsState((prevState) => ({
+          ...prevState,
+          appliedJobs: prevState.appliedJobs.filter((job) => job._id !== id),
+        }));
+
+        setConfirmationMsg("Job application deleted successfully!");
       } catch (error) {
-        console.log("error", error);
+        console.error("Error deleting job application:", error);
+        setConfirmationMsg("Failed to delete job application.");
       }
     }
   };
@@ -257,24 +264,23 @@ const AllJobsTable = () => {
   };
 
   // Pagination logic
-  const totalPages = Math.ceil(applications?.length / itemsPerPage);
+  const { appliedJobs, isLoading, error } = appliedJobsState;
+  const totalPages = Math.ceil(appliedJobs.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentItems = applications?.slice(
-    startIndex,
-    startIndex + itemsPerPage
-  );
+  const currentItems = appliedJobs.slice(startIndex, startIndex + itemsPerPage);
 
   if (isLoading) {
     return <SkeletonListTable />;
+  }
+
+  if (error) {
+    return <div className="text-red-500">{error}</div>;
   }
 
   return (
     <div className="list">
       <div className="page-header flex justify-between items-center mb-4 bg-white p-4 md:p-6 shadow">
         <p className="text-xl md:text-2xl">All Applied Jobs</p>
-        {/* <button className="create-btn text-dashPrimary border-dashPrimary border bg-white rounded py-2 px-4">
-          <Link href={"/dashboard/add-job"}>Add appliedJobs</Link>
-        </button> */}
       </div>
 
       {confirmationMsg && (
@@ -293,28 +299,34 @@ const AllJobsTable = () => {
             </tr>
           </thead>
           <tbody>
-            {currentItems?.map((item) => (
-              <tr key={item._id} className="text-center">
+            {currentItems.map((item, i) => (
+              <tr key={i}>
                 <td className="py-2 px-4 border-b">
-                  {item.full_name || "Anonymous"}
+                  {item?.full_name || "Anonymous"}
                 </td>
                 <td className="py-2 px-4 border-b">
-                  {item.mobile || "+8801...."}
+                  {item?.mobile || "+8801...."}
                 </td>
                 <td className="py-2 px-4 border-b">{item.job_title}</td>
                 <td className="py-2 px-4 border-b">
-                  {new Date(item.date).toLocaleDateString()}
-                </td>
+                {new Date(item.date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  })}{" "}
+  {new Date(item.date).toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+  })}</td>
                 <td className="py-3 px-4 border-b flex space-x-2">
-                  <button className="text-dashSideNavText hover:underline"></button>
                   <button
                     onClick={() => handleDelete(item._id)}
                     className="text-dashSideNavText"
                   >
-                    <FaTrash />
+                    <FaTrash title="Delete Job" />
                   </button>
                   <button className="text-dashSideNavText hover:underline">
-                    <Link href={`/jobDetails/${item?.job_id}`}>
+                    <Link href={`applied-job-details/${item._id }`}>
                       <FaEye title="View Job Description" />
                     </Link>
                   </button>

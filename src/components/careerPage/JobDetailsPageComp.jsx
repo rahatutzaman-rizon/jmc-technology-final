@@ -5,7 +5,7 @@ import ApplyJobModal from "./ApplyJobModal";
 const JobDetailsPageComp = ({ job }) => {
   console.log("job",job);
   return (
-    <section className={`${poppins.className}`}>
+    <section className={poppins.className}>
       <div className="bg-white rounded-lg shadow-sm overflow-hidden container max-w-7xl mx-auto">
         <div className="p-6">
           <h2 className="text-3xl lg:text-5xl font-bold mb-6">
@@ -22,10 +22,12 @@ const JobDetailsPageComp = ({ job }) => {
             <strong>Job Location: </strong>
             {job?.job_location || "On site"}
           </p>
+
           <p className="text-gray-700 mb-4 text-justify">
             <strong>Experience Level: </strong>
             {job?.experience_requirements || "N/A"}
           </p>
+
           <p className="text-gray-700 mb-4 text-justify">
             <strong>Education Qualification: </strong>
             {job?.educational_requirements || "N/A"}
@@ -53,11 +55,11 @@ const JobDetailsPageComp = ({ job }) => {
             <p className="py-4">
               <span className="font-bold">Read Before Applying</span>
             </p>
+
             <p className="text-justify">
-              Please ensure you have the relevant skills and qualifications
-              before applying. We value candidates who are ready to contribute
-              to our team and grow within the company.
+              Please ensure you have the relevant skills and qualifications before applying. We value candidates who are ready to contribute to our team and grow within the company.
             </p>
+
             <ApplyJobModal job={job} />
           </div>
         </div>

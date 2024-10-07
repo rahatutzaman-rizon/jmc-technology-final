@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import { Menu, X, ChevronDown, Settings, Code } from "lucide-react"
-import image from "../../../assets/client/jmctllogo.svg"
+import image from "../../../assets/client/Tech-logo.png"
 
 const services = [
   "Web Development", "App Development", "Domain Hosting", "Motion Graphics",

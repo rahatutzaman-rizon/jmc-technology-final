@@ -211,7 +211,7 @@ const AllJobsTable = () => {
         refetchVacancies(); // Refetch the vacancies to update the list
       } else {
         console.error("Failed to delete job:", data.message);
-        setConfirmationMsg(`Failed to delete job: ${data.message}`);
+        setConfirmationMsg(`Failed to delete job  : ${data.message}`);
       }
     } catch (error) {
       console.error("Error while deleting job:", error);

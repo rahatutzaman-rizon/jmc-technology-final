@@ -6,7 +6,11 @@ import Footer from "../components/shared/footer";
 const Clientlayout = ({ children }) => {
   return (
     <>
-    <Header></Header>
+    <div className="mt-12">
+   <Header></Header>
+
+    </div>
+   
       {children}
      <Footer></Footer>
     </>
