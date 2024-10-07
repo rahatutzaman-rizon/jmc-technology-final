@@ -11,10 +11,11 @@ export default function Home() {
    <div>
 
   <Banner></Banner>
+  <Glance></Glance>
 <MissionVision></MissionVision>
 <Service></Service>
 <ServicesTabs></ServicesTabs>
-<Glance></Glance>
+
 <Testimonials></Testimonials>
 <HonorableClientsPage></HonorableClientsPage>
 

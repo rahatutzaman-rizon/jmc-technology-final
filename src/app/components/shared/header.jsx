@@ -1,108 +1,99 @@
 'use client'
 
-import React, { useState, useRef, useEffect } from "react"
+import React, { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
-import { Menu, X, ChevronDown } from "lucide-react"
-import logo from "../../../assets/client/Tech-logo.png"
+import { Menu, X, ChevronDown, Settings, Code } from "lucide-react"
+import image from "../../../assets/client/jmctllogo.svg"
 
 const services = [
   "Web Development", "App Development", "Domain Hosting", "Motion Graphics",
   "Digital Marketing", "SEO Services", "Media Support", "IT Consultancy",
-  "Cybersecurity", "DevOps Services", "E-commerce Solutions", "QA and Testing"
 ]
 
 const products = [
   "eCommerce", "Education", "Real Estate", "Healthcare", "Fintech",
-  "Manufacturing", "Professional Services", "Non-Profit", "Entertainment",
-  "Fashion and Apparel", "Sports & Fitness"
+  "Manufacturing", "Professional Services", "Non-Profit"
 ]
 
 const NavLink = ({ href, children }) => (
   <Link
     href={href}
-    className="text-gray-800 font-semibold text-base hover:text-blue-600 transition-colors"
+    className="text-teal-800 font-medium hover:text-teal-700 transition-colors"
   >
     {children}
   </Link>
 )
 
-const DropdownLink = ({ title, items, isOpen, setIsOpen, ref }) => (
-  <div
-    className="relative "
-    onMouseEnter={() => setIsOpen(true)}
-    onMouseLeave={() => setIsOpen(false)}
-    ref={ref}
-  >
-    <button className="text-gray-800 font-semibold text-base hover:text-blue-600 transition-colors flex items-center">
-      {title}
-      <ChevronDown size={16} className="ml-1" />
-    </button>
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 10 }}
-          transition={{ duration: 0.2 }}
-          className="absolute left-0 mt-2 w-64 bg-white rounded-lg shadow-xl z-20"
-        >
-          <div className="grid grid-cols-1 gap-1 p-2">
+
+
+const DropdownMenu = ({ title, items }) => {
+  const [isOpen, setIsOpen] = useState(false)
+  
+  return (
+    <div className="relative group">
+      <button 
+        className="flex items-center text-teal-800 font-medium hover:text-teal-700 transition-colors"
+        onMouseEnter={() => setIsOpen(true)}
+        onMouseLeave={() => setIsOpen(false)}
+      >
+        {title}
+        <ChevronDown size={16} className="ml-1" />
+      </button>
+      
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.3 }}
+            className="absolute left-0 mt-4 w-[28rem] backdrop-blur-2xl bg-opacity-95 rounded-lg text-sm font-medium shadow-lg py-4 px-6 grid grid-cols-2 gap-4 z-50"
+            onMouseEnter={() => setIsOpen(true)}
+            onMouseLeave={() => setIsOpen(false)}
+          >
             {items.map((item, index) => (
               <Link
                 key={index}
                 href={`/${title.toLowerCase().replace(/\s+/g, "-")}/${item.toLowerCase().replace(/\s+/g, "-")}`}
-                className="block text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors py-2 px-4 rounded-md"
+                className="block text-teal-900 hover:text-teal-700 transition-colors"
               >
                 {item}
               </Link>
             ))}
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  </div>
-)
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
 
-const MobileNavLink = ({ href, onClick, children }) => (
-  <Link
-    href={href}
-    className="text-gray-800 font-semibold text-lg hover:text-blue-600 transition-colors py-2"
-    onClick={onClick}
-  >
-    {children}
-  </Link>
-)
-
-const MobileDropdownLink = ({ title, items, isOpen, setIsOpen, closeMenu }) => (
-  <div className="relative">
+const MobileDropdown = ({ title, items, isOpen, setIsOpen }) => (
+  <div className="mb-4">
     <button
-      className="w-full text-left text-gray-800 font-semibold text-lg hover:text-blue-600 transition-colors py-2 flex items-center justify-between"
+      className="flex justify-between items-center w-full text-left text-gray-700 mb-2"
       onClick={() => setIsOpen(!isOpen)}
     >
       {title}
       <ChevronDown size={20} className={`transform transition-transform ${isOpen ? 'rotate-180' : ''}`} />
     </button>
+    
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          exit={{ opacity: 0, height: 0 }}
-          transition={{ duration: 0.2 }}
-          className="mt-2 bg-gray-50 rounded-lg"
+          initial={{ height: 0 }}
+          animate={{ height: 'auto' }}
+          exit={{ height: 0 }}
+          transition={{ duration: 0.3 }}
+          className="overflow-hidden"
         >
-          <div className="py-2">
+          <div className="pl-4 space-y-2">
             {items.map((item, index) => (
               <Link
                 key={index}
                 href={`/${title.toLowerCase().replace(/\s+/g, "-")}/${item.toLowerCase().replace(/\s+/g, "-")}`}
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
-                onClick={() => {
-                  setIsOpen(false)
-                  closeMenu()
-                }}
+                className="block py-2 text-gray-600 hover:text-blue-600"
               >
                 {item}
               </Link>
@@ -115,110 +106,74 @@ const MobileDropdownLink = ({ title, items, isOpen, setIsOpen, closeMenu }) => (
 )
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isServicesOpen, setIsServicesOpen] = useState(false)
-  const [isProductsOpen, setIsProductsOpen] = useState(false)
-  const servicesRef = useRef(null)
-  const productsRef = useRef(null)
-
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (servicesRef.current && !servicesRef.current.contains(event.target)) {
-        setIsServicesOpen(false)
-      }
-      if (productsRef.current && !productsRef.current.contains(event.target)) {
-        setIsProductsOpen(false)
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside)
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside)
-    }
-  }, [servicesRef, productsRef])
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [mobileServiceOpen, setMobileServiceOpen] = useState(false)
+  const [mobileProductOpen, setMobileProductOpen] = useState(false)
 
   return (
-    <header className="bg-white shadow-md w-full h-28 py-2 px-4 md:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
-        <Link href="/" className="flex items-center space-x-2">
-          <Image
-            src={logo}
-            alt="JMC Technology Logo"
-            width={130}
-            height={80}
-          />
-        </Link>
+    <header className="shadow fixed backdrop-blur-2xl bg-opacity-90 w-full top-0 z-50">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex justify-between items-center h-16">
+          <Link href="/" className="flex-shrink-0">
+            <Image
+              src={image}
+              alt="Company Logo"
+              width={140}
+              height={80}
+              className="h-20 w-auto"
+            />
+          </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center space-x-8">
-          <NavLink href="/">Home</NavLink>
-          <DropdownLink
-            title="Our Services"
-            items={services}
-            isOpen={isServicesOpen}
-            setIsOpen={setIsServicesOpen}
-            ref={servicesRef}
-          />
-          <DropdownLink
-            title="All Products"
-            items={products}
-            isOpen={isProductsOpen}
-            setIsOpen={setIsProductsOpen}
-            ref={productsRef}
-          />
-          <NavLink href="/blog">Blog</NavLink>
-          <NavLink href="/career">Career</NavLink>
-          <NavLink href="/contact">Contact Us</NavLink>
-        </nav>
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center space-x-8 ">
+            <NavLink href="/">Home</NavLink>
+            <DropdownMenu title="Services" items={services} />
+            <DropdownMenu title="Products" items={products} />
+            <NavLink href="/blogs">Blog</NavLink>
+            <NavLink href="/careers">Careers</NavLink>
+            <NavLink href="/contact">Contact</NavLink>
+            
+          </nav>
 
-        {/* Mobile Menu Button */}
-        <button
-          className="lg:hidden text-gray-700 hover:text-blue-600 transition-colors"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+          {/* Mobile menu button */}
+          <button
+            className="lg:hidden p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Navigation */}
       <AnimatePresence>
-        {isMenuOpen && (
-          <motion.nav
+        {isMobileMenuOpen && (
+          <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
+            animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="lg:hidden mt-4 bg-white"
+            className="lg:hidden bg-white border-t border-gray-200"
           >
-            <div className="flex flex-col space-y-2 p-4">
-              <MobileNavLink href="/" onClick={() => setIsMenuOpen(false)}>
-                Home
-              </MobileNavLink>
-              <MobileDropdownLink
-                title="Our Services"
+            <div className="px-4 pt-2 pb-3 space-y-1">
+              <Link href="/" className="block py-2 text-gray-700">Home</Link>
+              <MobileDropdown
+                title="Services"
                 items={services}
-                isOpen={isServicesOpen}
-                setIsOpen={setIsServicesOpen}
-                closeMenu={() => setIsMenuOpen(false)}
+                isOpen={mobileServiceOpen}
+                setIsOpen={setMobileServiceOpen}
               />
-              <MobileDropdownLink
-                title="All Products"
+              <MobileDropdown
+                title="Products"
                 items={products}
-                isOpen={isProductsOpen}
-                setIsOpen={setIsProductsOpen}
-                closeMenu={() => setIsMenuOpen(false)}
+                isOpen={mobileProductOpen}
+                setIsOpen={setMobileProductOpen}
               />
-              <MobileNavLink href="/blog" onClick={() => setIsMenuOpen(false)}>
-                Blog
-              </MobileNavLink>
-              <MobileNavLink href="/career" onClick={() => setIsMenuOpen(false)}>
-                Career
-              </MobileNavLink>
-              <MobileNavLink href="/contact" onClick={() => setIsMenuOpen(false)}>
-                Contact Us
-              </MobileNavLink>
+              <Link href="/blogs" className="block py-2 text-gray-700">Blog</Link>
+              <Link href="/careers" className="block py-2 text-gray-700">Careers</Link>
+              <Link href="/contact" className="block py-2 text-gray-700">Contact</Link>
+             
             </div>
-          </motion.nav>
+          </motion.div>
         )}
       </AnimatePresence>
     </header>

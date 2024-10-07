@@ -9,8 +9,8 @@ export const poppins = Poppins({
 
 
 export const metadata = {
-  title: "JMC Technology",
-  description: "JMC Technology",
+  title: "JMC Technology Ltd",
+  description: "JMC Technology Ltd",
 };
 
 export default function RootLayout({ children }) {

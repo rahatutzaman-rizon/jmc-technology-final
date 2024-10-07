@@ -97,10 +97,10 @@ const navItemsUp = [
         name: "All Applied Jobs",
         href: "/dashboard/all-applied-jobs",
       },
-      {
-        name: "Online Application",
-        href: "/dashboard/career/application",
-      },
+      // {
+      //   name: "Online Application",
+      //   href: "/dashboard/career/application",
+      // },
     ],
   },
   // {

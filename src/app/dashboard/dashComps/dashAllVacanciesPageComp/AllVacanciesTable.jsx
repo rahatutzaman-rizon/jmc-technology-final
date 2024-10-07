@@ -286,11 +286,11 @@ const AllJobsTable = () => {
                   >
                     <FaTrash />
                   </button>
-                  {/* <button className="text-dashSideNavText hover:underline">
+                  <button className="text-dashSideNavText hover:underline">
                     <Link href={`/jobDetails/${item._id}`}>
                       <FaEye title="View Job Description" />
                     </Link>
-                  </button> */}
+                  </button>
                 </td>
               </tr>
             ))}

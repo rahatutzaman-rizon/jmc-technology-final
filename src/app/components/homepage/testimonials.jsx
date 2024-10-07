@@ -137,7 +137,7 @@ export default function RefinedTechTestimonialSlider() {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-4xl font-extrabold text-gray-900 mb-4">What Our Clients Say</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-base text-gray-600 max-w-3xl mx-auto">
             Hear from professionals how our solution is impacting their businesses and transforming their workflow.
           </p>
         </motion.div>
