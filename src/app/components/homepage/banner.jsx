@@ -189,7 +189,7 @@ export default function Banner() {
                 </div>
                 <div className="w-full h-[calc(100%-40px)] rounded-xl overflow-hidden">
                   <ReactPlayer
-                    url="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                    url="https://www.youtube.com/watch?v=e5wjZIBuKF4"
                     width="100%"
                     height="100%"
                     controls
