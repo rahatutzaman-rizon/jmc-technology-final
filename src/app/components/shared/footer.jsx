@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube, FaTiktok, FaTwitter, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaGlobe } from 'react-icons/fa';
 import { SiThreads } from 'react-icons/si';
-import logo from "../../../assets/client/tech1.png"
+import logo from "../../../assets/client/jmctllogo.svg"
 
 const EnhancedFooter = () => {
   return (
@@ -38,7 +38,7 @@ const EnhancedFooter = () => {
             <h3 className="font-bold text-xl text-white mb-4 pb-2 border-b-2 border-blue-500">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/about" className="hover:text-blue-400 transition duration-300 flex items-center">
+                <Link href="/about-us" className="hover:text-blue-400 transition duration-300 flex items-center">
                   <span className="mr-2">▸</span> About Us
                 </Link>
               </li>
@@ -81,20 +81,13 @@ const EnhancedFooter = () => {
             </div>
           </div>
         </div>
-        <div className="mt-8 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center">
-          <div className="mb-4 md:mb-0  p-2 rounded-lg  ">
-            <Image src={logo} alt="JMC Technology Logo" width={180} height={100} />
-          </div>
-          {/* <div className="flex items-center space-x-4">
-            <div className="bg-white p-2 rounded-lg">
-              <Image src="/caab-logo.png" alt="CAAB Logo" width={80} height={40} />
-            </div>
-            <div className="bg-white p-2 rounded-lg">
-              <Image src="/taan-logo.png" alt="TAAN Logo" width={80} height={40} />
-            </div>
-          </div> */}
-        </div>
-        <div className="mt-6 text-center text-sm">
+        <div className="mt-2 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-center items-center text-center">
+  <div className="mb-4 md:mb-0 p-2 rounded-lg flex justify-center"> {/* Add flex and justify-center here */}
+    <Image src={logo} alt="JMC Technology Logo" width={230} height={120} />
+  </div>
+</div>
+
+        <div className="mt-2 text-center text-sm">
           <p>&copy; {new Date().getFullYear()} JMC Technology Ltd. All rights reserved.</p>
         </div>
       </div>
